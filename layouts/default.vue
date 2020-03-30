@@ -4,18 +4,15 @@
     <main role="main" class="main">
       <nuxt />
     </main>
-    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 export default {
   components: {
-    Navbar,
-    Footer
+    Navbar
   }
 };
 </script>
@@ -25,5 +22,9 @@ export default {
 
 #ec-web {
   font-family: "Noto Sans TC", sans-serif;
+}
+
+main {
+  margin-top: 65px !important;
 }
 </style>
