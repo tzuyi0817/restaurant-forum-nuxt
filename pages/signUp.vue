@@ -2,11 +2,25 @@
   <div class="container py-5">
     <form class="w-100" @submit.prevent.stop="handleSubmit">
       <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
       </div>
 
       <div class="form-label-group mb-2">
-        <label for="email">email</label>
+        <label for="name">Name</label>
+        <input
+          id="name"
+          name="name"
+          v-model="name"
+          type="text"
+          class="form-control"
+          placeholder="name"
+          required
+          autofocus
+        />
+      </div>
+
+      <div class="form-label-group mb-2">
+        <label for="email">Email</label>
         <input
           id="email"
           name="email"
@@ -15,7 +29,6 @@
           class="form-control"
           placeholder="email"
           required
-          autofocus
         />
       </div>
 
@@ -32,11 +45,24 @@
         />
       </div>
 
+      <div class="form-label-group mb-3">
+        <label for="password-check">Password Check</label>
+        <input
+          id="password-check"
+          name="passwordCheck"
+          v-model="passwordCheck"
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          required
+        />
+      </div>
+
       <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Submit</button>
 
       <div class="text-center mb-3">
         <p>
-          <nuxt-link to="/signUp">Sign Up</nuxt-link>
+          <nuxt-link to="/signIn">Sign In</nuxt-link>
         </p>
       </div>
 
@@ -49,15 +75,19 @@
 export default {
   data() {
     return {
+      name: "",
       email: "",
-      password: ""
+      password: "",
+      passwordCheck: ""
     };
   },
   methods: {
-    handleSubmit(e) {
+    handleSubmit() {
       const data = JSON.stringify({
+        name: this.name,
         email: this.email,
-        password: this.password
+        password: this.password,
+        passwordCheck: this.passwordCheck
       });
 
       console.log("data", data);
