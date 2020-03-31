@@ -32,7 +32,11 @@
         />
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Submit</button>
+      <button
+        class="btn btn-lg btn-primary btn-block mb-3"
+        type="submit"
+        :disabled="isProcessing"
+      >{{isProcessing ? "登入中" : "Submit"}}</button>
 
       <div class="text-center mb-3">
         <p>
@@ -52,32 +56,61 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      isProcessing: false
     };
   },
   methods: {
-    handleSubmit() {
-      authorizationAPI
-        .signIn({
+    async handleSubmit() {
+      try {
+        if (!this.email || !this.password) {
+          this.$swal({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            icon: "warning",
+            title: "請填入 email 和 password"
+          });
+          return;
+        }
+
+        this.isProcessing = true;
+
+        const { data, statusText } = await authorizationAPI.signIn({
           email: this.email,
           password: this.password
-        })
-        .then(response => {
-          const { data } = response;
-
-          localStorage.setItem("token", data.token);
-
-          this.$router.push("/restaurants");
         });
 
-      this.$swal({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        icon: "success",
-        title: "登入成功"
-      });
+        if (statusText !== "OK" || data.status !== "success") {
+          throw new Error(statusText);
+        }
+
+        localStorage.setItem("token", data.token);
+
+        this.$swal({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          icon: "success",
+          title: "登入成功"
+        });
+
+        this.$router.push("/restaurants");
+      } catch (error) {
+        this.password = "";
+        this.isProcessing = false;
+
+        this.$swal({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          icon: "error",
+          title: "請確認您輸入的帳號密碼錯誤"
+        });
+      }
     }
   }
 };

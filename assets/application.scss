@@ -1,0 +1,41 @@
+* {
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #4d4d4d;
+  outline: none;
+}
+
+%btn-primary-style {
+  color: #fff;
+  background-color: #bd2333;
+  border-color: #bd2333;
+}
+
+%btn-primary-hover-style {
+  background: transparent;
+  color: #bd2333;
+  text-decoration: none;
+  border: 2px solid #bd2333;
+}
+
+.btn-primary {
+  @extend %btn-primary-style;
+  &:disabled {
+    @extend %btn-primary-style;
+  }
+  &:not(:disabled):not(.disabled):active {
+    @extend %btn-primary-hover-style;
+  }
+  &:hover {
+    @extend %btn-primary-hover-style;
+  }
+}
+
+a {
+  color: #bd2333;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: #bd2333;
+  }
+}
