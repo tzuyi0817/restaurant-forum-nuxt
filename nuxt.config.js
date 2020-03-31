@@ -55,6 +55,9 @@ export default {
       },
     ]
   },
+  router: {
+    linkExactActiveClass: 'active'
+  },
   /*
   ** Build configuration
   */
