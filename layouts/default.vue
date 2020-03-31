@@ -1,7 +1,7 @@
 <template>
   <div id="ec-web">
     <Navbar />
-    <main role="main" class="main">
+    <main role="main" class="mt-5 bg-white">
       <nuxt />
     </main>
   </div>

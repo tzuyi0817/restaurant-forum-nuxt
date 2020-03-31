@@ -1,11 +1,8 @@
-<template>
-  <div class="container">123</div>
-</template>
-
 <script>
 export default {
-  components: {},
-  data() {}
+  fetch({ redirect }) {
+    redirect(301, "/signIn");
+  }
 };
 </script>
 

@@ -61,6 +61,14 @@ export default {
       });
 
       console.log("data", data);
+      this.$swal({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        icon: "success",
+        title: "登入成功"
+      });
     }
   }
 };

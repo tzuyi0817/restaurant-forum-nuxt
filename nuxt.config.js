@@ -41,6 +41,7 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     'nuxt-fontawesome',
+    'vue-sweetalert2/nuxt'
   ],
   fontawesome: {
     imports: [
