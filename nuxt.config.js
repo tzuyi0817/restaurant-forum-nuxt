@@ -29,7 +29,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/axios'
+    '~/plugins/axios',
+    '~/plugins/sweetalert2'
   ],
   /*
   ** Nuxt.js dev-modules

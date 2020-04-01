@@ -20,6 +20,7 @@
     "bootstrap-vue": "^2.0.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
+    "sweetalert2": "^9.10.8",
     "vue-sweetalert2": "^3.0.3"
   },
   "devDependencies": {

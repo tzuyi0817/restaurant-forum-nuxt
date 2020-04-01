@@ -51,6 +51,7 @@
 
 <script>
 import authorizationAPI from "../api/authorization";
+import { Toast } from "../plugins/sweetalert2";
 
 export default {
   data() {
@@ -64,11 +65,7 @@ export default {
     async handleSubmit() {
       try {
         if (!this.email || !this.password) {
-          this.$swal({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
+          Toast.fire({
             icon: "warning",
             title: "請填入 email 和 password"
           });
@@ -88,11 +85,7 @@ export default {
 
         localStorage.setItem("token", data.token);
 
-        this.$swal({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000,
+        Toast.fire({
           icon: "success",
           title: "登入成功"
         });
@@ -102,11 +95,7 @@ export default {
         this.password = "";
         this.isProcessing = false;
 
-        this.$swal({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000,
+        Toast.fire({
           icon: "error",
           title: "請確認您輸入的帳號密碼錯誤"
         });
