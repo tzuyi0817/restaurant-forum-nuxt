@@ -1,6 +1,6 @@
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
@@ -30,7 +30,8 @@ export default {
   */
   plugins: [
     '~/plugins/axios',
-    '~/plugins/sweetalert2'
+    '~/plugins/sweetalert2',
+    '~/plugins/mixins'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -60,6 +61,10 @@ export default {
   },
   router: {
     linkExactActiveClass: 'active'
+  },
+  loading: {
+    color: '#00c58e',
+    continuous: true
   },
   /*
   ** Build configuration

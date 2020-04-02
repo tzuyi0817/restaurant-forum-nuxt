@@ -2,14 +2,29 @@
   <div class="card">
     <div class="card-header">最新餐廳</div>
     <div class="card-body">
-      <div>
+      <div v-for="restaurant in restaurants" :key="restaurant.id">
         <h4>
-          <a href="#">Deangelo Farrell</a>
-          <small>中式料理</small>
+          <nuxt-link to="#">{{ restaurant.name }}</nuxt-link>&nbsp;
+          <small>{{ restaurant.Category.name }}</small>
         </h4>
-        <p>Voluptates veritatis blanditiis ipsam. Tempora molestiae ut qui deserunt debitis sit. Impedit est rem. Blanditiis aliquid atque quo necessitatibus. Veniam sint explicabo. Est velit soluta.</p>11 days ago
+        <p>{{ restaurant.description }}</p>
+        {{ restaurant.createdAt | fromNow }}
         <hr />
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { fromNowFilter } from "../plugins/mixins";
+
+export default {
+  mixins: [fromNowFilter],
+  props: {
+    restaurants: {
+      type: Array,
+      required: true
+    }
+  }
+};
+</script>
