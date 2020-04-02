@@ -6,18 +6,32 @@
   outline: none;
 }
 
+// ================================ button style ================================ 
+
 %btn-primary-style {
   color: #fff;
   background-color: #bd2333;
   border-color: #bd2333;
 }
 
-%btn-primary-hover-style {
+%btn-hover-style {
   background: transparent;
   color: #bd2333;
   text-decoration: none;
   border: 2px solid #bd2333;
 }
+
+%btn-style {
+  min-width: 85px;
+  padding: 7px 14px;
+  font-size: 14px;
+  color: white;
+  background-color: #bd2333;
+  border: 2px solid #bd2333;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
 
 .btn-primary {
   @extend %btn-primary-style;
@@ -25,12 +39,53 @@
     @extend %btn-primary-style;
   }
   &:not(:disabled):not(.disabled):active {
-    @extend %btn-primary-hover-style;
+    @extend %btn-hover-style;
   }
   &:hover {
-    @extend %btn-primary-hover-style;
+    @extend %btn-hover-style;
   }
 }
+
+.btn {
+  @extend %btn-style;
+  outline: none;
+  box-shadow: none;
+  &:focus {
+  box-shadow: none;
+  background-color: #bd2333;
+  outline: none;
+  }
+  &:hover {
+    @extend %btn-hover-style;
+  }
+}
+
+.btn-border {
+  @extend %btn-hover-style;
+  &:hover {
+    @extend %btn-style;
+  }
+}
+
+.btn-outline-success {
+  border-color: white;
+  border-width: 1px;
+  &:hover {
+    color: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.85);
+    border-width: 1px;
+  }
+}
+
+// ================================ form style ================================ 
+
+.form-control:focus {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  outline: none;
+  box-shadow: none;
+}
+
+// ================================ link style ================================ 
 
 a {
   color: #bd2333;
@@ -38,4 +93,59 @@ a {
   &:hover {
     color: #bd2333;
   }
+}
+
+.page-link:focus,
+.navbar-dark {
+  .navbar-toggler {
+  outline: none;
+  box-shadow: none;
+  }
+}
+
+
+// ================================ badge style ================================ 
+
+.badge-secondary {
+  color: inherit;
+  background-color: #e8e8e8;
+  padding: 6px;
+  font-size: 12.5px;
+}
+
+// ================================ card style ================================ 
+
+.card {
+  border: none;
+  box-shadow: -1px 4px 10px rgba(0, 0, 0, 0.06);
+  &-text {
+    font-size: 17px;
+    line-height: 1.3;
+    .title-wrap {
+      margin: 0;
+    }
+    a {
+      font-family: inherit;
+      font-size: 24px;
+      line-height: 1.3;
+      color: #4d4d4d;
+      &:hover {
+        color: #bd2333;
+      }
+    }
+  }
+}
+
+// ================================ table style ================================ 
+
+.table {
+  td, th {
+    vertical-align: middle;
+  }
+  
+}
+
+.swal2-popup.swal2-toast {
+  box-shadow: none;
+  border: 1px solid #dadada;
 }

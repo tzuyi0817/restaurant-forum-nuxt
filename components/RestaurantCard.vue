@@ -16,10 +16,33 @@
         <p class="card-text text-truncate">{{ restaurant.description }}</p>
       </div>
       <div class="card-footer">
-        <button type="button" class="btn btn-danger btn-border favorite mr-2">移除最愛</button>
-        <button type="button" class="btn btn-primary btn-border favorite mr-2">加到最愛</button>
-        <button type="button" class="btn btn-danger like mr-2">Unlike</button>
-        <button type="button" class="btn btn-primary like mr-2">Like</button>
+        <button
+          v-if="restaurant.isFavorited"
+          type="button"
+          class="btn btn-danger btn-border favorite mr-2"
+          @click.stop.prevent="deleteFavorite"
+        >移除最愛</button>
+
+        <button
+          v-else
+          type="button"
+          class="btn btn-primary btn-border favorite mr-2"
+          @click.stop.prevent="addFavorite"
+        >加到最愛</button>
+
+        <button
+          v-if="restaurant.isLiked"
+          type="button"
+          class="btn btn-danger like mr-2"
+          @click.stop.prevent="deleteLike"
+        >Unlike</button>
+
+        <button
+          v-else
+          type="button"
+          class="btn btn-primary like mr-2"
+          @click.stop.prevent="addLike"
+        >Like</button>
       </div>
     </div>
   </div>
@@ -37,6 +60,32 @@ export default {
     return {
       restaurant: this.initialRestaurant
     };
+  },
+  methods: {
+    deleteFavorite() {
+      this.restaurant = {
+        ...this.restaurant,
+        isFavorited: false
+      };
+    },
+    addFavorite() {
+      this.restaurant = {
+        ...this.restaurant,
+        isFavorited: true
+      };
+    },
+    deleteLike() {
+      this.restaurant = {
+        ...this.restaurant,
+        isLiked: false
+      };
+    },
+    addLike() {
+      this.restaurant = {
+        ...this.restaurant,
+        isLiked: true
+      };
+    }
   }
 };
 </script>
