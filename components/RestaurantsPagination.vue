@@ -95,8 +95,8 @@ export default {
   span {
     color: #bd2333;
   }
-  .active,
-  .active span {
+  &.active .page-link,
+  &.active span {
     @extend %active-and-hover-style;
     z-index: 1;
   }

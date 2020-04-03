@@ -1,16 +1,25 @@
 import { apiHelper } from '../plugins/axios'
 
 export default {
+  getUsersTop() {
+    return apiHelper.get('/users/top')
+  },
   addFavorite({ restaurantId }) {
     return apiHelper.post(`/favorite/${restaurantId}`, null)
   },
   deleteFavorite({ restaurantId }) {
-    return apiHelper.delete(`/favorite/${restaurantId}`, null)
+    return apiHelper.delete(`/favorite/${restaurantId}`)
   },
   addLike({ restaurantId }) {
     return apiHelper.post(`/like/${restaurantId}`, null)
   },
   deleteLike({ restaurantId }) {
-    return apiHelper.delete(`/like/${restaurantId}`, null)
+    return apiHelper.delete(`/like/${restaurantId}`)
   },
+  addFollowing({ userId }) {
+    return apiHelper.post(`/following/${userId}`, null)
+  },
+  deleteFollowing({ userId }) {
+    return apiHelper.delete(`/following/${userId}`)
+  }
 }
