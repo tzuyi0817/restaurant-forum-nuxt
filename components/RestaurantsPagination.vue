@@ -85,7 +85,8 @@ export default {
   height: 37px;
   padding: 7px 20px;
   color: #bd2333;
-  &:hover {
+  &:hover,
+  &:hover span {
     @extend %active-and-hover-style;
   }
 }
@@ -94,7 +95,8 @@ export default {
   span {
     color: #bd2333;
   }
-  .active {
+  .active,
+  .active span {
     @extend %active-and-hover-style;
     z-index: 1;
   }
