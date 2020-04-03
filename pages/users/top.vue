@@ -6,7 +6,7 @@
     <div class="row text-center">
       <div class="col-3" v-for="user in users" :key="user.id">
         <nuxt-link to="#">
-          <img :src="user.image" width="140px" height="140px" />
+          <img :src="user.image | emptyImage" width="140px" height="140px" />
         </nuxt-link>
         <h2>{{ user.name }}</h2>
         <span class="badge badge-secondary">追蹤人數：{{ user.FollowerCount }}</span>
@@ -35,8 +35,10 @@
 import NavTabs from "../../components/NavTabs";
 import userAPI from "../../api/users";
 import { Toast } from "../../plugins/sweetalert2";
+import { emptyImageFilter } from "../../plugins/mixins";
 
 export default {
+  mixins: [emptyImageFilter],
   components: {
     NavTabs
   },
