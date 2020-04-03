@@ -14,6 +14,12 @@
     </div>
 
     <!-- 分頁標籤 RestaurantPagination -->
+    <RestaurantsPagination
+      v-if="totalPage > 1"
+      :category-id="categoryId"
+      :current-page="currentPage"
+      :total-page="totalPage"
+    />
   </div>
 </template>
 
@@ -21,6 +27,7 @@
 import NavTabs from "../../components/NavTabs";
 import RestaurantCard from "../../components/RestaurantCard";
 import RestaurantsNavPills from "../../components/RestaurantsNavPills";
+import RestaurantsPagination from "../../components/RestaurantsPagination";
 import restaurantAPI from "../../api/restaurants";
 import { Toast } from "../../plugins/sweetalert2";
 
@@ -29,7 +36,8 @@ export default {
   components: {
     NavTabs,
     RestaurantCard,
-    RestaurantsNavPills
+    RestaurantsNavPills,
+    RestaurantsPagination
   },
   data() {
     return {
@@ -40,11 +48,11 @@ export default {
       totalPage: -1
     };
   },
-  async asyncData({ query, page = 1, categoryId = "" }) {
+  async asyncData({ query }) {
     try {
       const { data, statusText } = await restaurantAPI.getRestaurants({
-        page: query.page,
-        categoryId: query.categoryId
+        page: query.page || 1,
+        categoryId: query.categoryId || ""
       });
 
       if (statusText !== "OK") {

@@ -1,7 +1,7 @@
 <template>
   <ul class="nav nav-pills mb-4">
     <li class="nav-item">
-      <nuxt-link class="nav-link" :to="{ name: 'restaurants',  query: { categoryId: '' } }">全部</nuxt-link>
+      <nuxt-link class="nav-link" :to="{ name: 'restaurants' }">全部</nuxt-link>
     </li>
 
     <li v-for="category in categories" :key="category.id" class="nav-item">
