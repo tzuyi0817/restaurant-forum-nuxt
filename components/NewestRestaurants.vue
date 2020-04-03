@@ -4,7 +4,9 @@
     <div class="card-body">
       <div v-for="restaurant in restaurants" :key="restaurant.id">
         <h4>
-          <nuxt-link to="#">{{ restaurant.name }}</nuxt-link>&nbsp;
+          <nuxt-link
+            :to="{ name: 'restaurants-id', params: { id: restaurant.id}}"
+          >{{ restaurant.name }}</nuxt-link>&nbsp;
           <small>{{ restaurant.Category.name }}</small>
         </h4>
         <p>{{ restaurant.description }}</p>

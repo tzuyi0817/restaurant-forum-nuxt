@@ -4,7 +4,9 @@
     <div class="card-body">
       <div v-for="comment in comments" :key="comment.id">
         <h4>
-          <nuxt-link to="#">{{ comment.Restaurant ? comment.Restaurant.name : '-' }}</nuxt-link>
+          <nuxt-link
+            :to="{ name: 'redtaurants-id', params: { id: comment.Restaurant.id}}"
+          >{{ comment.Restaurant ? comment.Restaurant.name : '-' }}</nuxt-link>
         </h4>
         <p>{{comment.text}}</p>by
         <nuxt-link to="#">{{ comment.User.name }}</nuxt-link>
