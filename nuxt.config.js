@@ -66,6 +66,7 @@ export default {
     color: '#00c58e',
     continuous: true
   },
+  watchQuery: true,
   /*
   ** Build configuration
   */

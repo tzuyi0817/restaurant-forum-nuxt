@@ -2,6 +2,7 @@
   <div class="container py-5">
     <NavTabs />
     <!-- 餐廳類別標籤 RestaurantsNavPills -->
+    <RestaurantsNavPills :categories="categories" />
 
     <div class="row">
       <!-- 餐廳卡片 RestaurantCard-->
@@ -19,12 +20,16 @@
 <script>
 import NavTabs from "../../components/NavTabs";
 import RestaurantCard from "../../components/RestaurantCard";
+import RestaurantsNavPills from "../../components/RestaurantsNavPills";
 import restaurantAPI from "../../api/restaurants";
+import { Toast } from "../../plugins/sweetalert2";
 
 export default {
+  watchQuery: ["page", "categoryId"],
   components: {
     NavTabs,
-    RestaurantCard
+    RestaurantCard,
+    RestaurantsNavPills
   },
   data() {
     return {
@@ -35,16 +40,30 @@ export default {
       totalPage: -1
     };
   },
-  async asyncData() {
-    const { data } = await restaurantAPI.getRestaurants();
+  async asyncData({ query, page = 1, categoryId = "" }) {
+    try {
+      const { data, statusText } = await restaurantAPI.getRestaurants({
+        page: query.page,
+        categoryId: query.categoryId
+      });
 
-    return {
-      restaurants: data.restaurants,
-      categories: data.categories,
-      categoryId: data.categoryId,
-      currentPage: data.page,
-      totalPage: data.totalPage.length
-    };
+      if (statusText !== "OK") {
+        throw new Error(statusText);
+      }
+
+      return {
+        restaurants: data.restaurants,
+        categories: data.categories,
+        categoryId: data.categoryId,
+        currentPage: data.page,
+        totalPage: data.totalPage.length
+      };
+    } catch (error) {
+      Toast.fire({
+        icon: "error",
+        title: "無法取得餐廳資料，請稍後再試"
+      });
+    }
   }
 };
 </script>

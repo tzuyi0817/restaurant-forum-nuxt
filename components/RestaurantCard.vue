@@ -12,7 +12,7 @@
         <p class="card-text title-wrap">
           <nuxt-link to="#">{{ restaurant.name }}</nuxt-link>
         </p>
-        <span class="badge badge-secondary">中式料理</span>
+        <span class="badge badge-secondary">{{ restaurant.Category.name }}</span>
         <p class="card-text text-truncate">{{ restaurant.description }}</p>
       </div>
       <div class="card-footer">
