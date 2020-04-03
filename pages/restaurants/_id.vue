@@ -4,18 +4,21 @@
     <RestaurantDetail :restaurant="restaurant" :is-favorited="isFavorited" :is-liked="isLiked" />
     <hr />
     <!-- 餐廳評論 RestaurantComments -->
+    <RestaurantComments :comments="comments" @after-delete-comment="afterDeleteComment" />
     <!-- 新增評論 CreateComment -->
   </div>
 </template>
 
 <script>
 import RestaurantDetail from "../../components/RestaurantDetail";
+import RestaurantComments from "../../components/RestaurantComments";
 import restaurantAPI from "../../api/restaurants";
 import { Toast } from "../../plugins/sweetalert2";
 
 export default {
   components: {
-    RestaurantDetail
+    RestaurantDetail,
+    RestaurantComments
   },
   data() {
     return {
@@ -48,6 +51,11 @@ export default {
         icon: "error",
         title: "無法取得餐廳資料，請稍後再試"
       });
+    }
+  },
+  methods: {
+    afterDeleteComment(commentId) {
+      this.comments = this.comments.filter(comment => comment.id !== commentId);
     }
   }
 };
