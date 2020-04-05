@@ -52,6 +52,7 @@
 <script>
 import authorizationAPI from "../api/authorization";
 import { Toast } from "../plugins/sweetalert2";
+import { mapMutations } from "vuex";
 
 export default {
   data() {
@@ -62,6 +63,8 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["setCurrentUser"]),
+
     async handleSubmit() {
       try {
         if (!this.email || !this.password) {
@@ -83,7 +86,9 @@ export default {
           throw new Error(statusText);
         }
 
-        localStorage.setItem("token", data.token);
+        window.localStorage.setItem("token", data.token);
+
+        this.setCurrentUser(data.user);
 
         Toast.fire({
           icon: "success",

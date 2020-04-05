@@ -16,33 +16,37 @@
     <div id="navbarSupportedContent" class="navbar-collapse collapse">
       <div class="ml-auto d-flex align-items-center">
         <!-- is user is admin -->
-        <nuxt-link to="#" class="text-white mr-3">管理員後台</nuxt-link>
+        <nuxt-link v-if="currentUser.isAdmin" to="/admin" class="text-white mr-3">管理員後台</nuxt-link>
 
         <!-- is user is login -->
-        <nuxt-link to="#" class="text-white mr-3">使用者 您好</nuxt-link>
-        <button type="button" class="btn btn-sm btn-outline-success my-2 my-sm-0">登出</button>
+        <template v-if="isAuthenticated">
+          <nuxt-link to="#" class="text-white mr-3">{{ currentUser.name || '使用者'}} 您好</nuxt-link>
+
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-success my-2 my-sm-0"
+            @click="logout"
+          >登出</button>
+        </template>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
+
 export default {
   name: "Navbar",
-  data() {
-    return {
-      currentUser: {
-        id: -1,
-        name: "",
-        email: "",
-        image: "",
-        isAdmin: false
-      },
-      isAuthenticated: false
-    };
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"])
   },
-  asyncData(context) {
-    return {};
+  methods: {
+    ...mapMutations(["revokeAuthentication"]),
+    logout() {
+      this.revokeAuthentication();
+      this.$router.push("/signIn");
+    }
   }
 };
 </script>
