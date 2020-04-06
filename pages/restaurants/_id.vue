@@ -16,6 +16,7 @@ import RestaurantComments from "../../components/RestaurantComments";
 import CreateComment from "../../components/CreateComment";
 import restaurantAPI from "../../api/restaurants";
 import { Toast } from "../../plugins/sweetalert2";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -30,6 +31,9 @@ export default {
       isFavorited: false,
       isLiked: false
     };
+  },
+  computed: {
+    ...mapState(["currentUser"])
   },
   async asyncData({ params }) {
     try {
@@ -67,8 +71,8 @@ export default {
         id: commentId,
         RestaurantId: restaurantId,
         User: {
-          id: 1,
-          name: "root"
+          id: this.currentUser.id,
+          name: this.currentUser.name
         },
         text,
         createdAt: new Date()

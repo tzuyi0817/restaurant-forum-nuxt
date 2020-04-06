@@ -11,6 +11,9 @@
 </template>
 
 <script>
+import { Toast } from "../plugins/sweetalert2";
+import commentsAPI from "../api/comments";
+
 export default {
   props: {
     restaurantId: {
@@ -25,13 +28,48 @@ export default {
     };
   },
   methods: {
-    addComment() {
-      this.$emit("after-create-comment", {
-        commentId: 999,
-        restaurantId: this.restaurantId,
-        text: this.text
-      });
-      this.text = "";
+    async addComment() {
+      try {
+        if (!this.text) {
+          Toast.fire({
+            icon: "warning",
+            title: "您尚未填寫任何評論"
+          });
+          return;
+        }
+
+        this.isProcessing = true;
+
+        const { data, statusText } = await commentsAPI.createComment({
+          restaurantId: this.restaurantId,
+          text: this.text
+        });
+
+        if ((statusText !== "OK", data.status !== "success")) {
+          throw new Error(statusText);
+        }
+
+        this.$emit("after-create-comment", {
+          commentId: data.commentId,
+          restaurantId: this.restaurantId,
+          text: this.text
+        });
+
+        this.text = "";
+        this.isProcessing = false;
+
+        Toast.fire({
+          icon: "success",
+          title: "成功新增評論"
+        });
+      } catch (error) {
+        this.isProcessing = false;
+
+        Toast.fire({
+          icon: "error",
+          title: "無法新增評論，請稍後再試"
+        });
+      }
     }
   }
 };
