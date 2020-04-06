@@ -13,5 +13,8 @@ export default {
   },
   getTop() {
     return apiHelper.get('/restaurants/top')
+  },
+  getDashboard({ restaurantId }) {
+    return apiHelper.get(`/restaurants/${restaurantId}/dashboard`)
   }
 }

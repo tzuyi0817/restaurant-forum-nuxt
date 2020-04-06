@@ -29,7 +29,10 @@
     </div>
     <div class="col-lg-8">
       <p>{{ restaurant.description }}</p>
-      <nuxt-link class="btn btn-primary btn-border mr-2" to="#">Dashboard</nuxt-link>
+      <nuxt-link
+        class="btn btn-primary btn-border mr-2"
+        :to="{ name: 'restaurants-id-dashboard', params: { id: restaurant.id}}"
+      >Dashboard</nuxt-link>
 
       <button
         v-if="isFavorited"
