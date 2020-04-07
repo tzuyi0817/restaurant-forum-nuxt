@@ -31,5 +31,13 @@ export default {
     delete({ categoryId }) {
       return apiHelper.delete(`/admin/categories/${categoryId}`);
     }
+  },
+  users: {
+    get() {
+      return apiHelper.get("/admin/users");
+    },
+    update({ userId, isAdmin }) {
+      return apiHelper.put(`/admin/users/${userId}`, { isAdmin });
+    }
   }
 };

@@ -73,6 +73,9 @@ import adminAPI from "../../../api/admin";
 import { Toast } from "../../../plugins/sweetalert2";
 
 export default {
+  components: {
+    AdminNav
+  },
   data() {
     return {
       categories: [],
