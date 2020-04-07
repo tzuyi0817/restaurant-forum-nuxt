@@ -29,10 +29,30 @@
         <tr v-for="category in categories" :key="category.id">
           <th scope="row">{{ category.id }}</th>
           <td class="position-relative">
-            <div class="category-name">{{ category.name }}</div>
+            <div v-show="!category.isEditing" class="category-name">{{ category.name }}</div>
+
+            <input
+              v-show="category.isEditing"
+              v-model="category.name"
+              type="text"
+              class="form-control"
+            />
+            <span v-show="category.isEditing" class="cancel" @click="handleCancel(category.id)">✕</span>
           </td>
           <td class="d-flex justify-content-between">
-            <button type="button" class="btn btn-link mr-2">Edit</button>
+            <button
+              v-show="!category.isEditing"
+              type="button"
+              class="btn btn-link mr-2"
+              @click.stop.prevent="toggleIsEditing(category.id)"
+            >Edit</button>
+
+            <button
+              v-show="category.isEditing"
+              type="button"
+              class="btn btn-link mr-2"
+              @click.stop.prevent="updateCategory({ categoryId: category.id, name: category.name })"
+            >Save</button>
 
             <button
               type="button"
@@ -69,7 +89,11 @@ export default {
       }
 
       return {
-        categories: data.categories
+        categories: data.categories.map(category => ({
+          ...category,
+          isEditing: false,
+          nameCached: ""
+        }))
       };
     } catch (error) {
       Toast.fire({
@@ -93,7 +117,8 @@ export default {
 
         this.categories.push({
           id: data.categoryId,
-          name: this.newCategoryName
+          name: this.newCategoryName,
+          isEditing: false
         });
 
         this.isProcessing = false;
@@ -142,7 +167,85 @@ export default {
           title: "無法刪除類別，請稍後再試"
         });
       }
+    },
+    toggleIsEditing(categoryId) {
+      this.categories = this.categories.map(category => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            isEditing: !category.isEditing,
+            nameCached: category.name
+          };
+        }
+        return category;
+      });
+    },
+    async updateCategory({ categoryId, name }) {
+      try {
+        const { data, statusText } = await adminAPI.categories.update({
+          categoryId,
+          name
+        });
+
+        if (statusText !== "OK" || data.status !== "success") {
+          throw new Error(statusText);
+        }
+
+        this.toggleIsEditing(categoryId);
+
+        Toast.fire({
+          icon: "success",
+          title: "已成功更新餐廳類別"
+        });
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法更新餐廳類別，請稍後再試"
+        });
+      }
+    },
+    handleCancel(categoryId) {
+      this.categories = this.categories.map(category => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            name: category.nameCached
+          };
+        }
+        return category;
+      });
+      this.toggleIsEditing(categoryId);
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.category-name {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid transparent;
+  outline: 0;
+  cursor: auto;
+}
+
+.btn-link {
+  width: 62px;
+}
+
+.cancel {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #aaaaaa;
+  border-radius: 50%;
+  user-select: none;
+  cursor: pointer;
+  font-size: 12px;
+}
+</style>
