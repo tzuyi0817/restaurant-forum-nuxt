@@ -3,7 +3,10 @@
     <!-- 後台導覽頁籤 AdminNav -->
     <AdminNav />
 
-    <nuxt-link to="#" class="btn btn-primary mb-4">
+    <nuxt-link
+      :to="{ name: 'admin-restaurants-new' }"
+      class="btn btn-primary mb-4"
+    >
       New Restaurant
     </nuxt-link>
 
