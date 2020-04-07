@@ -18,7 +18,7 @@
         <!-- is user is admin -->
         <nuxt-link
           v-if="currentUser.isAdmin"
-          to="/admin"
+          to="/admin/restaurants"
           class="text-white mr-3"
           >管理員後台</nuxt-link
         >
