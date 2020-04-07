@@ -37,7 +37,12 @@
 
           <nuxt-link to="#" class="btn btn-link">Edit</nuxt-link>
 
-          <button type="button" class="btn btn-link">
+          <button
+            type="button"
+            class="btn btn-link"
+            @click.stop.prevent="deleteRestaurant(restaurant.id)"
+            :disabled="isProcessing"
+          >
             Delete
           </button>
         </td>
@@ -47,11 +52,54 @@
 </template>
 
 <script>
+import { Toast } from "../plugins/sweetalert2";
+import adminRestaurantAPI from "../api/admin";
+
 export default {
   props: {
     restaurants: {
       type: Array,
       required: true
+    }
+  },
+  data() {
+    return {
+      isProcessing: false
+    };
+  },
+  methods: {
+    async deleteRestaurant(restaurantId) {
+      try {
+        this.isProcessing = true;
+
+        const { data, statusText } = await adminRestaurantAPI.restaurant.delete(
+          {
+            restaurantId
+          }
+        );
+
+        if (statusText !== "OK" || data.status !== "success") {
+          throw new Error(statusText);
+        }
+
+        this.restaurants = this.restaurants.filter(
+          restaurant => restaurant.id !== restaurantId
+        );
+
+        this.isProcessing = false;
+
+        Toast.fire({
+          icon: "success",
+          title: "刪除餐廳成功"
+        });
+      } catch (error) {
+        this.isProcessing = false;
+
+        Toast.fire({
+          icon: "error",
+          title: "無法刪除餐廳，請稍後再試"
+        });
+      }
     }
   }
 };

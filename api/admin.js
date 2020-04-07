@@ -7,6 +7,9 @@ export default {
     },
     getDetail({ restaurantId }) {
       return apiHelper.get(`/admin/restaurants/${restaurantId}`);
+    },
+    delete({ restaurantId }) {
+      return apiHelper.delete(`/admin/restaurants/${restaurantId}`);
     }
   }
 };
