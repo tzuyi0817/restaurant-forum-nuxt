@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-md-12 mb-3">
       <h1>{{ restaurant.name }}</h1>
-      <p class="badge badge-secondary mt-1 mb-3">{{ restaurant.Category.name }}</p>
+      <p class="badge badge-secondary mt-1 mb-3">
+        {{ restaurant.Category.name }}
+      </p>
     </div>
     <div class="col-lg-4">
       <img
@@ -31,8 +33,12 @@
       <p>{{ restaurant.description }}</p>
       <nuxt-link
         class="btn btn-primary btn-border mr-2"
-        :to="{ name: 'restaurants-id-dashboard', params: { id: restaurant.id}}"
-      >Dashboard</nuxt-link>
+        :to="{
+          name: 'restaurants-id-dashboard',
+          params: { id: restaurant.id }
+        }"
+        >Dashboard</nuxt-link
+      >
 
       <button
         v-if="isFavorited"
@@ -40,7 +46,9 @@
         class="btn btn-danger btn-border mr-2"
         @click.stop.prevent="deleteFavorite(restaurant.id)"
         :disabled="isProcessing"
-      >移除最愛</button>
+      >
+        移除最愛
+      </button>
 
       <button
         v-else
@@ -48,7 +56,9 @@
         class="btn btn-primary btn-border mr-2"
         @click.stop.prevent="addFavorite(restaurant.id)"
         :disabled="isProcessing"
-      >加到最愛</button>
+      >
+        加到最愛
+      </button>
 
       <button
         v-if="isLiked"
@@ -56,7 +66,9 @@
         class="btn btn-danger like mr-2"
         @click.stop.prevent="deleteLike(restaurant.id)"
         :disabled="isProcessing"
-      >Unlike</button>
+      >
+        Unlike
+      </button>
 
       <button
         v-else
@@ -64,7 +76,9 @@
         class="btn btn-primary like mr-2"
         @click.stop.prevent="addLike(restaurant.id)"
         :disabled="isProcessing"
-      >Like</button>
+      >
+        Like
+      </button>
     </div>
   </div>
 </template>
@@ -199,9 +213,9 @@ export default {
 
 .btn-border.btn {
   background-color: #efefef;
-  color: #bd2333;
+  color: #6495ed;
   &:hover {
-    background-color: #bd2333;
+    background-color: #6495ed;
     color: #efefef;
   }
 }

@@ -6,7 +6,10 @@
         <nuxt-link
           class="page-link"
           aria-label="Previous"
-          :to="{name: 'restaurants', query: { categoryId, page: previousPage }}"
+          :to="{
+            name: 'restaurants',
+            query: { categoryId, page: previousPage }
+          }"
         >
           <span aria-hidden="true">&laquo;</span>
         </nuxt-link>
@@ -21,15 +24,16 @@
       >
         <nuxt-link
           class="page-link"
-          :to="{name: 'restaurants', query: { categoryId, page }}"
-        >{{ page }}</nuxt-link>
+          :to="{ name: 'restaurants', query: { categoryId, page } }"
+          >{{ page }}</nuxt-link
+        >
       </li>
 
       <!-- 前往下一頁 nextPage -->
       <li v-show="nextPage" class="page-item">
         <nuxt-link
           class="page-link"
-          :to="{name: 'restaurants', query: { categoryId, page: nextPage }}"
+          :to="{ name: 'restaurants', query: { categoryId, page: nextPage } }"
           aria-label="Next"
         >
           <span aria-hidden="true">&raquo;</span>
@@ -71,8 +75,8 @@ export default {
 <style lang="scss" scoped>
 %active-and-hover-style {
   color: white;
-  background-color: #bd2333;
-  border-color: #bd2333;
+  background-color: #6495ed;
+  border-color: #6495ed;
 }
 
 .pagination {
@@ -84,7 +88,7 @@ export default {
 .page-link {
   height: 37px;
   padding: 7px 20px;
-  color: #bd2333;
+  color: #6495ed;
   &:hover,
   &:hover span {
     @extend %active-and-hover-style;
@@ -93,7 +97,7 @@ export default {
 
 .page-item {
   span {
-    color: #bd2333;
+    color: #6495ed;
   }
   &.active .page-link,
   &.active span {

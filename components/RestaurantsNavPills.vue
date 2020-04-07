@@ -8,7 +8,8 @@
       <nuxt-link
         class="nav-link"
         :to="{ name: 'restaurants', query: { categoryId: category.id } }"
-      >{{ category.name }}</nuxt-link>
+        >{{ category.name }}</nuxt-link
+      >
     </li>
   </ul>
 </template>
@@ -40,7 +41,7 @@ export default {
   .nav-link.active,
   .show > .nav-link {
     border-width: 2px;
-    border-color: #bd2333;
+    border-color: #6495ed;
     background-color: transparent;
   }
 }

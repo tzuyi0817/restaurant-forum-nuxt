@@ -16,17 +16,26 @@
     <div id="navbarSupportedContent" class="navbar-collapse collapse">
       <div class="ml-auto d-flex align-items-center">
         <!-- is user is admin -->
-        <nuxt-link v-if="currentUser.isAdmin" to="/admin" class="text-white mr-3">管理員後台</nuxt-link>
+        <nuxt-link
+          v-if="currentUser.isAdmin"
+          to="/admin"
+          class="text-white mr-3"
+          >管理員後台</nuxt-link
+        >
 
         <!-- is user is login -->
         <template v-if="isAuthenticated">
-          <nuxt-link to="#" class="text-white mr-3">{{ currentUser.name || '使用者'}} 您好</nuxt-link>
+          <nuxt-link to="#" class="text-white mr-3"
+            >{{ currentUser.name || "使用者" }} 您好</nuxt-link
+          >
 
           <button
             type="button"
             class="btn btn-sm btn-outline-success my-2 my-sm-0"
             @click="logout"
-          >登出</button>
+          >
+            登出
+          </button>
         </template>
       </div>
     </div>
@@ -59,7 +68,7 @@ export default {
 
 nav.bg-dark {
   padding: 14px 16px;
-  background-color: #bd2333 !important;
+  background-color: #6495ed !important;
 }
 
 .navbar-brand {
