@@ -75,8 +75,8 @@ export default {
 <style lang="scss" scoped>
 %active-and-hover-style {
   color: white;
-  background-color: #6495ed;
-  border-color: #6495ed;
+  background-color: #3333ff;
+  border-color: #3333ff;
 }
 
 .pagination {
@@ -88,7 +88,7 @@ export default {
 .page-link {
   height: 37px;
   padding: 7px 20px;
-  color: #6495ed;
+  color: #3333ff;
   &:hover,
   &:hover span {
     @extend %active-and-hover-style;
@@ -97,7 +97,7 @@ export default {
 
 .page-item {
   span {
-    color: #6495ed;
+    color: #3333ff;
   }
   &.active .page-link,
   &.active span {

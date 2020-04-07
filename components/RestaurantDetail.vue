@@ -213,9 +213,9 @@ export default {
 
 .btn-border.btn {
   background-color: #efefef;
-  color: #6495ed;
+  color: #3333ff;
   &:hover {
-    background-color: #6495ed;
+    background-color: #3333ff;
     color: #efefef;
   }
 }

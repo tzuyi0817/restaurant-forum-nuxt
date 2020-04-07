@@ -194,15 +194,15 @@ export default {
 .badge.badge-secondary {
   padding: 0;
   margin: 8px 0;
-  color: #6495ed;
+  color: #3333ff;
   background-color: transparent;
 }
 
 .btn-border.btn {
   background-color: #efefef;
-  color: #6495ed;
+  color: #3333ff;
   &:hover {
-    background-color: #6495ed;
+    background-color: #3333ff;
     color: #efefef;
   }
 }

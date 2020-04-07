@@ -10,15 +10,15 @@
 
 %btn-primary-style {
   color: #fff;
-  background-color: #6495ed;
-  border-color: #6495ed;
+  background-color: #3333ff;
+  border-color: #3333ff;
 }
 
 %btn-hover-style {
   background: transparent;
-  color: #6495ed;
+  color: #3333ff;
   text-decoration: none;
-  border: 2px solid #6495ed;
+  border: 2px solid #3333ff;
 }
 
 %btn-style {
@@ -26,8 +26,8 @@
   padding: 7px 14px;
   font-size: 14px;
   color: white;
-  background-color: #6495ed;
-  border: 2px solid #6495ed;
+  background-color: #3333ff;
+  border: 2px solid #3333ff;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -51,7 +51,7 @@
   box-shadow: none;
   &:focus {
     box-shadow: none;
-    background-color: #6495ed;
+    background-color: #3333ff;
     outline: none;
   }
   &:hover {
@@ -88,10 +88,10 @@
 
 a,
 span {
-  color: #6495ed;
+  color: #3333ff;
   transition: all 0.3s ease-in-out;
   &:hover {
-    color: #6495ed;
+    color: #3333ff;
   }
 }
 
@@ -129,7 +129,7 @@ span {
       line-height: 1.3;
       color: #4d4d4d;
       &:hover {
-        color: #6495ed;
+        color: #3333ff;
       }
     }
   }

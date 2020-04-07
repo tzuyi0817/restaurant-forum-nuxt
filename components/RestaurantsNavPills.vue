@@ -41,7 +41,7 @@ export default {
   .nav-link.active,
   .show > .nav-link {
     border-width: 2px;
-    border-color: #6495ed;
+    border-color: #3333ff;
     background-color: transparent;
   }
 }

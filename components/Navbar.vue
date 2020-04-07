@@ -68,7 +68,7 @@ export default {
 
 nav.bg-dark {
   padding: 14px 16px;
-  background-color: #6495ed !important;
+  background: linear-gradient(-40deg, #6666ff, #3333ff) !important;
 }
 
 .navbar-brand {
