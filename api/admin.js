@@ -13,6 +13,9 @@ export default {
     },
     delete({ restaurantId }) {
       return apiHelper.delete(`/admin/restaurants/${restaurantId}`);
+    },
+    update({ restaurantId, formData }) {
+      return apiHelper.put(`/admin/restaurants/${restaurantId}`, formData);
     }
   },
   categories: {

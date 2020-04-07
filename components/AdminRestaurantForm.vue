@@ -17,21 +17,17 @@
       <label for="categoryId">Category</label>
       <select
         id="categoryId"
-        v-model="restaurant.categoryId"
+        v-model="restaurant.CategoryId"
         class="form-control"
         name="categoryId"
         required
       >
-        <option value="" selected disabled>
-          --請選擇--
-        </option>
+        <option value selected disabled>--請選擇--</option>
         <option
           v-for="category in categories"
           :key="category.id"
           :value="category.id"
-        >
-          {{ category.name }}
-        </option>
+        >{{ category.name }}</option>
       </select>
     </div>
 
@@ -63,7 +59,7 @@
       <label for="opening-hours">Opening Hours</label>
       <input
         id="opening-hours"
-        v-model="restaurant.openingHours"
+        v-model="restaurant.opening_hours"
         type="time"
         class="form-control"
         name="opening_hours"
@@ -101,13 +97,17 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-primary" :disabled="isProcessing">
-      {{ isProcessing ? "處理中" : "送出" }}
-    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      :disabled="isProcessing"
+    >{{ isProcessing ? "處理中" : "送出" }}</button>
   </form>
 </template>
 
 <script>
+import { Toast } from "../plugins/sweetalert2";
+
 export default {
   props: {
     categories: {
@@ -117,24 +117,32 @@ export default {
     isProcessing: {
       type: Boolean,
       default: false
+    },
+    initialRestaurant: {
+      type: Object,
+      default: () => {
+        return {
+          name: "",
+          CategoryId: "",
+          tel: "",
+          address: "",
+          description: "",
+          image: "",
+          opening_hours: ""
+        };
+      }
     }
   },
   data() {
     return {
       restaurant: {
-        name: "",
-        categoryId: "",
-        tel: "",
-        address: "",
-        description: "",
-        image: "",
-        openingHours: ""
+        ...this.initialRestaurant
       }
     };
   },
   methods: {
     handleFileChange(e) {
-      const files = e.target.files;
+      const { files } = e.target;
       if (!files.length) return; // 如果沒有檔案則離開此函式
       // 否則產生預覽圖...
       const imageURL = window.URL.createObjectURL(files[0]);
@@ -148,7 +156,7 @@ export default {
         });
         return;
       }
-      if (!this.restaurant.categoryId) {
+      if (!this.restaurant.CategoryId) {
         Toast.fire({
           icon: "warning",
           title: "請選擇餐廳類別"

@@ -35,7 +35,14 @@
             >Show</nuxt-link
           >
 
-          <nuxt-link to="#" class="btn btn-link">Edit</nuxt-link>
+          <nuxt-link
+            :to="{
+              name: 'admin-restaurants-id-edit',
+              params: { id: restaurant.id }
+            }"
+            class="btn btn-link"
+            >Edit</nuxt-link
+          >
 
           <button
             type="button"
