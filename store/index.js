@@ -33,7 +33,7 @@ export const mutations = {
 
 export const actions = {};
 
-export const plugins = [new VuexPersistence().plugin]
+export const plugins = process.browser ? [new VuexPersistence().plugin] : []
 
 // export const modules = {
 //   user
