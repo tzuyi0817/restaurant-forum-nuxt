@@ -18,7 +18,10 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: {
+    color: '#00c58e',
+    continuous: true
+  },
   /*
   ** Global CSS
   */
@@ -62,10 +65,6 @@ export default {
   },
   router: {
     linkExactActiveClass: 'active'
-  },
-  loading: {
-    color: '#00c58e',
-    continuous: true
   },
   watchQuery: true,
   /*

@@ -5,7 +5,7 @@
       <div v-for="comment in comments" :key="comment.id">
         <h4>
           <nuxt-link
-            :to="{ name: 'redtaurants-id', params: { id: comment.Restaurant.id}}"
+            :to="{ name: 'restaurants-id', params: { id: comment.Restaurant.id}}"
           >{{ comment.Restaurant ? comment.Restaurant.name : '-' }}</nuxt-link>
         </h4>
         <p>{{comment.text}}</p>by

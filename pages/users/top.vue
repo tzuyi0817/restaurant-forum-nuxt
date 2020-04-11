@@ -36,7 +36,6 @@ import NavTabs from "../../components/NavTabs";
 import userAPI from "../../api/users";
 import { Toast } from "../../plugins/sweetalert2";
 import { emptyImageFilter } from "../../plugins/mixins";
-
 export default {
   mixins: [emptyImageFilter],
   components: {
@@ -51,11 +50,9 @@ export default {
   async asyncData() {
     try {
       const { data, statusText } = await userAPI.getUsersTop();
-
       if (statusText !== "OK") {
         throw new Error(statusText);
       }
-
       return {
         users: data.users
       };
@@ -70,13 +67,10 @@ export default {
     async deleteFollowed(userId) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.deleteFollowing({ userId });
-
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-
         this.users = this.users
           .map(user => {
             if (user.id !== userId) {
@@ -89,11 +83,9 @@ export default {
             };
           })
           .sort((a, b) => b.FollowerCount - a.FollowerCount);
-
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
-
         Toast.fire({
           icon: "error",
           title: "無法取消追蹤，請稍後再試"
@@ -103,13 +95,10 @@ export default {
     async addFollowed(userId) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.addFollowing({ userId });
-
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-
         this.users = this.users
           .map(user => {
             if (user.id !== userId) {
@@ -122,11 +111,9 @@ export default {
             };
           })
           .sort((a, b) => b.FollowerCount - a.FollowerCount);
-
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
-
         Toast.fire({
           icon: "error",
           title: "無法追蹤，請稍後再試"

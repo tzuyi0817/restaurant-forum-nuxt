@@ -4,6 +4,9 @@ export default {
   getCurrentUser() {
     return apiHelper.get(`/get_current_user`)
   },
+  get({ userId }) {
+    return apiHelper.get(`/users/${userId}`)
+  },
   getUsersTop() {
     return apiHelper.get('/users/top')
   },
