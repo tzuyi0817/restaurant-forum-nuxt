@@ -86,7 +86,7 @@ export default {
           throw new Error(statusText);
         }
 
-        window.localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.token);
 
         this.setCurrentUser(data.user);
 

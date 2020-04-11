@@ -21,13 +21,13 @@ export const mutations = {
       ...currentUser
     }
     state.isAuthenticated = true
-    state.token = window.localStorage.getItem('token')
+    state.token = localStorage.getItem('token')
   },
   revokeAuthentication(state) {
     state.currentUser = {}
     state.isAuthenticated = false
     state.token = ''
-    window.localStorage.removeItem('token')
+    localStorage.removeItem('token')
   }
 };
 
