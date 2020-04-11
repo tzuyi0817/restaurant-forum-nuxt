@@ -64,7 +64,8 @@ export default {
     ]
   },
   router: {
-    linkExactActiveClass: 'active'
+    linkExactActiveClass: 'active',
+    base: '/restaurant-forum-nuxt/'
   },
   watchQuery: true,
   /*
