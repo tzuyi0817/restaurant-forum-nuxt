@@ -1,9 +1,5 @@
-
 export default {
-  mode: 'universal',
-  /*
-  ** Headers of the page
-  */
+  ssr: true,
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -15,41 +11,26 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  /*
-  ** Customize the progress-bar color
-  */
   loading: {
     color: '#00c58e',
     continuous: true
   },
-  /*
-  ** Global CSS
-  */
   css: [
     '~assets/application.scss'
   ],
-  /*
-  ** Plugins to load before mounting the App
-  */
   plugins: [
     { src: '~/plugins/axios', ssr: false },
     { src: '~/plugins/localStorage', ssr: false },
     '~/plugins/sweetalert2',
     '~/plugins/mixins'
   ],
-  /*
-  ** Nuxt.js dev-modules
-  */
   buildModules: [
+    '@nuxt/typescript-build',
   ],
-  /*
-  ** Nuxt.js modules
-  */
   modules: [
-    // Doc: https://bootstrap-vue.js.org
-    'bootstrap-vue/nuxt',
     'nuxt-fontawesome',
-    'vue-sweetalert2/nuxt'
+    'vue-sweetalert2/nuxt',
+    'bootstrap-vue/nuxt',
   ],
   fontawesome: {
     imports: [
@@ -67,14 +48,9 @@ export default {
     linkExactActiveClass: 'active'
   },
   watchQuery: true,
-  /*
-  ** Build configuration
-  */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend(config, ctx) {
-    }
-  }
+    postcss: null,
+    // extend(config, ctx) {
+    // }
+  },
 }
