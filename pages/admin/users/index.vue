@@ -37,7 +37,6 @@
 <script>
 import AdminNav from "../../../components/AdminNav";
 import adminAPI from "../../../api/admin";
-import { Toast } from "../../../plugins/sweetalert2";
 import { mapState } from "vuex";
 
 export default {

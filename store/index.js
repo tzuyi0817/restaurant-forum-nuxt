@@ -1,6 +1,3 @@
-// import user from './user';
-import VuexPersistence from 'vuex-persist'
-
 export const state = () => ({
   currentUser: {
     id: -1,
@@ -14,6 +11,9 @@ export const state = () => ({
 });
 
 export const mutations = {
+  nuxtServerInit({ commit, dispatch }, { req, query }) {
+    
+  },
   setCurrentUser(state, currentUser) {
     state.currentUser = {
       ...state.currentUser,
@@ -32,10 +32,3 @@ export const mutations = {
 };
 
 export const actions = {};
-
-export const plugins = process.browser ? [new VuexPersistence().plugin] : []
-
-// export const modules = {
-//   user
-// }
-

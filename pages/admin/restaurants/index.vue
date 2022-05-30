@@ -19,7 +19,6 @@
 import AdminNav from "../../../components/AdminNav";
 import AdminRestaurantsTable from "../../../components/AdminRestaurantsTable";
 import adminRestaurantAPI from "../../../api/admin";
-import { Toast } from "../../../plugins/sweetalert2";
 
 export default {
   components: {
@@ -43,7 +42,7 @@ export default {
         restaurants: data.restaurants
       };
     } catch (error) {
-      Toast.fire({
+      this.$toast.fire({
         icon: "error",
         title: "無法取得餐廳資料，請稍後在試"
       });

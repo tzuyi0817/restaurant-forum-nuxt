@@ -1,31 +1,31 @@
-import { apiHelper } from '../plugins/axios'
+import { $axios } from "@/api";
 
 export default {
   getCurrentUser() {
-    return apiHelper.get(`/get_current_user`)
+    return $axios.get(`/get_current_user`);
   },
   get({ userId }) {
-    return apiHelper.get(`/users/${userId}`)
+    return $axios.get(`/users/${userId}`);
   },
   getUsersTop() {
-    return apiHelper.get('/users/top')
+    return $axios.get('/users/top');
   },
-  addFavorite({ restaurantId }) {
-    return apiHelper.post(`/favorite/${restaurantId}`, null)
+  addFavorite({ restaurantId }) {;
+    return $axios.post(`/favorite/${restaurantId}`, null);
   },
   deleteFavorite({ restaurantId }) {
-    return apiHelper.delete(`/favorite/${restaurantId}`)
+    return $axios.delete(`/favorite/${restaurantId}`);
   },
   addLike({ restaurantId }) {
-    return apiHelper.post(`/like/${restaurantId}`, null)
+    return $axios.post(`/like/${restaurantId}`, null);
   },
   deleteLike({ restaurantId }) {
-    return apiHelper.delete(`/like/${restaurantId}`)
+    return $axios.delete(`/like/${restaurantId}`);
   },
   addFollowing({ userId }) {
-    return apiHelper.post(`/following/${userId}`, null)
+    return $axios.post(`/following/${userId}`, null);
   },
   deleteFollowing({ userId }) {
-    return apiHelper.delete(`/following/${userId}`)
+    return $axios.delete(`/following/${userId}`);
   }
 }

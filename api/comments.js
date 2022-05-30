@@ -1,10 +1,10 @@
-import { apiHelper } from '../plugins/axios'
+import { $axios } from "@/api";
 
 export default {
   deleteComment({ commentId }) {
-    return apiHelper.delete(`/comments/${commentId}`)
+    return $axios.delete(`/comments/${commentId}`);
   },
   createComment({ restaurantId, text }) {
-    return apiHelper.post(`/comments`, { restaurantId, text })
+    return $axios.post(`/comments`, { restaurantId, text });
   },
 }

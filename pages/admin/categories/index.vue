@@ -70,7 +70,6 @@
 <script>
 import AdminNav from "../../../components/AdminNav";
 import adminAPI from "../../../api/admin";
-import { Toast } from "../../../plugins/sweetalert2";
 
 export default {
   components: {
@@ -99,7 +98,7 @@ export default {
         }))
       };
     } catch (error) {
-      Toast.fire({
+      this.$toast.fire({
         icon: "error",
         title: "無法取得類別資料，請稍後再試"
       });
@@ -127,14 +126,14 @@ export default {
         this.isProcessing = false;
         this.newCategoryName = "";
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "已成功新增類別"
         });
       } catch (error) {
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法新增類別，請稍後再試"
         });
@@ -158,14 +157,14 @@ export default {
 
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "已成功刪除該類別"
         });
       } catch (error) {
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法刪除類別，請稍後再試"
         });

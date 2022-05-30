@@ -106,8 +106,6 @@
 </template>
 
 <script>
-import { Toast } from "../plugins/sweetalert2";
-
 export default {
   props: {
     categories: {
@@ -150,14 +148,14 @@ export default {
     },
     handleSubmit(e) {
       if (!this.restaurant.name) {
-        Toast.fire({
+        this.$toast.fire({
           icon: "warning",
           title: "請填寫餐廳名稱"
         });
         return;
       }
       if (!this.restaurant.CategoryId) {
-        Toast.fire({
+        this.$toast.fire({
           icon: "warning",
           title: "請選擇餐廳類別"
         });

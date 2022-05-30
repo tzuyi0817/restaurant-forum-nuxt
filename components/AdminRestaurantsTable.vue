@@ -59,8 +59,7 @@
 </template>
 
 <script>
-import { Toast } from "../plugins/sweetalert2";
-import adminRestaurantAPI from "../api/admin";
+import adminRestaurantAPI from "@/api/admin";
 
 export default {
   props: {
@@ -95,14 +94,14 @@ export default {
 
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "刪除餐廳成功"
         });
       } catch (error) {
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法刪除餐廳，請稍後再試"
         });

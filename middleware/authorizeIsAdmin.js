@@ -1,6 +1,10 @@
 export default function ({ store, redirect }) {
-  const currentUser = store.state.currentUser
-  if (currentUser && currentUser.isAdmin === false) {
-    return redirect('/restaurants')
+  const { currentUser } = store.state;
+  if (currentUser?.isAdmin === false) {
+    $toast.fire({
+      icon: "error",
+      title: "帳號權限不符"
+    });
+    return redirect('/restaurants');
   }
 }

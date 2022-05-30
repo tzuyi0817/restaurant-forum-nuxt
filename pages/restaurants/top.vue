@@ -47,7 +47,6 @@
 import NavTabs from "../../components/NavTabs";
 import restaurantAPI from "../../api/restaurants";
 import userAPI from "../../api/users";
-import { Toast } from "../../plugins/sweetalert2";
 
 export default {
   components: {

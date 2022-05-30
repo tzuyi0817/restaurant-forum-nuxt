@@ -23,7 +23,6 @@ import NavTabs from "../../components/NavTabs";
 import NewestRestaurants from "../../components/NewestRestaurants";
 import NewestComments from "../../components/NewestComments";
 import restaurantsAPI from "../../api/restaurants";
-import { Toast } from "../../plugins/sweetalert2";
 
 export default {
   components: {

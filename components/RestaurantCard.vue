@@ -67,7 +67,6 @@
 
 <script>
 import userAPI from "../api/users";
-import { Toast } from "../plugins/sweetalert2";
 
 export default {
   props: {
@@ -103,7 +102,7 @@ export default {
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法將餐廳從最愛移除，請稍後再試"
         });
@@ -130,7 +129,7 @@ export default {
       } catch (error) {
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法將餐廳加入最愛，請稍後再試"
         });
@@ -155,7 +154,7 @@ export default {
       } catch (error) {
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法取消Like，請稍後再試"
         });
@@ -180,7 +179,7 @@ export default {
       } catch (error) {
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法Like，請稍後再試"
         });

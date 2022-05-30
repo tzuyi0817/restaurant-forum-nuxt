@@ -29,7 +29,6 @@
 
 <script>
 import restaurantAPI from "../../../api/restaurants";
-import { Toast } from "../../../plugins/sweetalert2";
 
 export default {
   data() {

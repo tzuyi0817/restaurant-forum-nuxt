@@ -51,7 +51,6 @@
 
 <script>
 import authorizationAPI from "../api/authorization";
-import { Toast } from "../plugins/sweetalert2";
 import { mapMutations } from "vuex";
 
 export default {
@@ -68,7 +67,7 @@ export default {
     async handleSubmit() {
       try {
         if (!this.email || !this.password) {
-          Toast.fire({
+          this.$toast.fire({
             icon: "warning",
             title: "請填入 email 和 password"
           });
@@ -90,7 +89,7 @@ export default {
 
         this.setCurrentUser(data.user);
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "登入成功"
         });
@@ -100,7 +99,7 @@ export default {
         this.password = "";
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "請確認您輸入的帳號密碼錯誤"
         });
