@@ -12,7 +12,6 @@
 <script>
 import AdminRestaurantForm from "../../../components/AdminRestaurantForm";
 import adminAPI from "../../../api/admin";
-import { Toast } from "../../../plugins/sweetalert2";
 
 export default {
   components: {
@@ -37,7 +36,7 @@ export default {
         categories: data.categories
       };
     } catch (error) {
-      Toast.fire({
+      this.$toast.fire({
         icon: "error",
         title: "無法取得資料，請稍後再試"
       });
@@ -56,7 +55,7 @@ export default {
           throw new Error(statusText);
         }
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "餐廳已成功建立"
         });
@@ -65,7 +64,7 @@ export default {
       } catch (error) {
         this.isProcessing = true;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法建立餐廳，請稍後再試"
         });

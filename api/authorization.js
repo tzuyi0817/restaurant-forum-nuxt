@@ -1,15 +1,15 @@
-import { apiHelper } from '../plugins/axios'
+import { $axios } from "@/api";
 
 export default {
   signIn({ email, password }) {
-    return apiHelper.post('/signin', {
+    return $axios.post('/signin', {
       email,
       password
-    })
+    });
   },
   signUp(data) {
-    return apiHelper.post('/signup', {
+    return $axios.post('/signup', {
       ...data
-    })
+    });
   }
 }

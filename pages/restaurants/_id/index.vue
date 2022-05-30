@@ -15,7 +15,6 @@ import RestaurantDetail from "../../../components/RestaurantDetail";
 import RestaurantComments from "../../../components/RestaurantComments";
 import CreateComment from "../../../components/CreateComment";
 import restaurantAPI from "../../../api/restaurants";
-import { Toast } from "../../../plugins/sweetalert2";
 import { mapState } from "vuex";
 
 export default {

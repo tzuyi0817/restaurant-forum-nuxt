@@ -29,7 +29,6 @@ import RestaurantCard from "../../components/RestaurantCard";
 import RestaurantsNavPills from "../../components/RestaurantsNavPills";
 import RestaurantsPagination from "../../components/RestaurantsPagination";
 import restaurantAPI from "../../api/restaurants";
-import { Toast } from "../../plugins/sweetalert2";
 
 export default {
   watchQuery: ["page", "categoryId"],

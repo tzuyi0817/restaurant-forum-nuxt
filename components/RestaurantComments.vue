@@ -23,7 +23,6 @@
 
 <script>
 import { fromNowFilter } from "../plugins/mixins";
-import { Toast } from "../plugins/sweetalert2";
 import commentAPI from "../api/comments";
 
 export default {
@@ -54,7 +53,7 @@ export default {
 
         this.$emit("after-delete-comment", commentId);
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "成功刪除評論"
         });
@@ -63,7 +62,7 @@ export default {
       } catch (error) {
         this.isPorcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法刪除評論，請稍再試"
         });

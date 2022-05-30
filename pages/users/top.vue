@@ -34,7 +34,6 @@
 <script>
 import NavTabs from "../../components/NavTabs";
 import userAPI from "../../api/users";
-import { Toast } from "../../plugins/sweetalert2";
 import { emptyImageFilter } from "../../plugins/mixins";
 export default {
   mixins: [emptyImageFilter],

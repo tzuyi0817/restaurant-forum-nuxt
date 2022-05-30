@@ -77,7 +77,6 @@
 
 <script>
 import authorizationAPI from "../api/authorization";
-import { Toast } from "../plugins/sweetalert2";
 
 export default {
   data() {
@@ -98,7 +97,7 @@ export default {
           !this.password ||
           !this.passwordCheck
         ) {
-          Toast.fire({
+          this.$toast.fire({
             icon: "warning",
             title: "請確認已填寫所有欄位"
           });
@@ -106,7 +105,7 @@ export default {
         }
 
         if (this.password !== this.passwordCheck) {
-          Toast.fire({
+          this.$toast.fire({
             icon: "warning",
             title: "兩次輸入的密碼不同"
           });
@@ -127,7 +126,7 @@ export default {
           throw new Error(statusText);
         }
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: data.message
         });
@@ -136,7 +135,7 @@ export default {
       } catch (error) {
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: `無法註冊 - ${error.message}`
         });

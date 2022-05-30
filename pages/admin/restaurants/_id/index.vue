@@ -39,7 +39,6 @@
 
 <script>
 import adminRestaurantAPI from "../../../../api/admin";
-import { Toast } from "../../../../plugins/sweetalert2";
 import { emptyImageFilter } from "../../../../plugins/mixins";
 
 export default {

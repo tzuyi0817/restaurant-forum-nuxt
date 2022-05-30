@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { Toast } from "../plugins/sweetalert2";
 import commentsAPI from "../api/comments";
 
 export default {
@@ -58,14 +57,14 @@ export default {
         this.text = "";
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "成功新增評論"
         });
       } catch (error) {
         this.isProcessing = false;
 
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法新增評論，請稍後再試"
         });
