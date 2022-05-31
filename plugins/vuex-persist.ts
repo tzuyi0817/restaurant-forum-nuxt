@@ -1,5 +1,5 @@
 import VuexPersistence from 'vuex-persist';
-import { Plugin } from '@nuxt/types';
+import type { Plugin } from '@nuxt/types';
 import type Store from '@/types/store';
 
 interface MyWindow extends Window {
@@ -14,7 +14,6 @@ const myPlugin: Plugin = ({ store }) => {
       reducer: (state: Store) => ({
         currentUser: state.currentUser,
         isAuthenticated: state.isAuthenticated,
-        token: state.token,
       })
     }).plugin(store);
   });

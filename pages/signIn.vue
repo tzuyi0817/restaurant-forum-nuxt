@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     ...mapMutations(["setCurrentUser"]),
-
     async handleSubmit() {
       try {
         if (!this.email || !this.password) {
@@ -75,7 +74,6 @@ export default {
         }
 
         this.isProcessing = true;
-
         const { data, statusText } = await authorizationAPI.signIn({
           email: this.email,
           password: this.password
@@ -85,10 +83,8 @@ export default {
           throw new Error(statusText);
         }
 
-        localStorage.setItem("token", data.token);
-
+        this.$cookies.set("token", data.token);
         this.setCurrentUser(data.user);
-
         this.$toast.fire({
           icon: "success",
           title: "登入成功"
