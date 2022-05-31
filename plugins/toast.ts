@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { Plugin } from '@nuxt/types';
+import type { Plugin } from '@nuxt/types';
 
 const myPlugin: Plugin = (context, inject) => {
   const toast = Swal.mixin({

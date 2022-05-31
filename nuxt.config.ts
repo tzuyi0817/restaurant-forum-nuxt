@@ -21,6 +21,7 @@ export default {
     '~assets/application.scss'
   ],
   plugins: [
+    '~/plugins/context',
     '~/plugins/axios',
     '~/plugins/toast',
     '~/plugins/mixins',
@@ -33,6 +34,7 @@ export default {
     'nuxt-fontawesome',
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+    'cookie-universal-nuxt',
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"]

@@ -11,6 +11,8 @@ specifiers:
   '@nuxtjs/proxy': ^1.3.3
   axios: ^0.27.2
   bootstrap-vue: ^2.22.0
+  cookie-universal: ^2.2.1
+  cookie-universal-nuxt: ^2.2.1
   defu: ^6.0.0
   moment: ^2.24.0
   node-fetch: '2'
@@ -39,6 +41,8 @@ dependencies:
   '@nuxtjs/proxy': 1.3.3
   axios: 0.27.2
   bootstrap-vue: 2.22.0_vue@2.6.14
+  cookie-universal: 2.2.1
+  cookie-universal-nuxt: 2.2.1
   defu: 6.0.0
   moment: 2.29.3
   node-fetch: 2.6.7
@@ -1893,6 +1897,10 @@ packages:
       '@types/node': 17.0.35
     dev: true
 
+  /@types/cookie/0.3.3:
+    resolution: {integrity: sha512-LKVP3cgXBT9RYj+t+9FDKwS5tdI+rPBXaNSkma7hvqy35lc7mAokC2zsqWJH0LaqIt3B962nuYI77hsJoT1gow==}
+    dev: false
+
   /@types/etag/1.8.0:
     resolution: {integrity: sha512-EdSN0x+Y0/lBv7YAb8IU4Jgm6DWM+Bqtz7o5qozl96fzaqdqbdfHS5qjdpFeIv7xQ8jSLyjMMNShgYtMajEHyQ==}
     dependencies:
@@ -3376,8 +3384,27 @@ packages:
       safe-buffer: 5.1.2
     dev: false
 
+  /cookie-universal-nuxt/2.2.1:
+    resolution: {integrity: sha512-pzk+CsmnNgcpFPNr8GO+B3dR0d0ovjnyFMC5Trx3zNUEEplw94CoEbv+SLSjxsXCMOF21Cmq202Od0zYbkOa+g==}
+    dependencies:
+      '@types/cookie': 0.3.3
+      cookie-universal: 2.2.1
+    dev: false
+
+  /cookie-universal/2.2.1:
+    resolution: {integrity: sha512-HMm8mNbMJ81IER5BZ3QF0wz5OA/od4jDB6agNwJjJ7oDnBnQBQwUJNeCXrYCBiCKh+ZzHDQ74D96HjUTHQHjsg==}
+    dependencies:
+      '@types/cookie': 0.3.3
+      cookie: 0.4.2
+    dev: false
+
   /cookie/0.3.1:
-    resolution: {integrity: sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=}
+    resolution: {integrity: sha512-+IJOX0OqlHCszo2mBUq+SrEbCj6w7Kpffqx60zYbPTFaO4+yYgRjHwcZNpWvaTylDHaV7PPmBHzSecZiMhtPgw==}
+    engines: {node: '>= 0.6'}
+    dev: false
+
+  /cookie/0.4.2:
+    resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
     engines: {node: '>= 0.6'}
     dev: false
 

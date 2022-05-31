@@ -1,4 +1,4 @@
-import { $axios } from "@/api";
+import { $axios } from '@/assets/utils/externalModule';
 
 export default {
   getCurrentUser() {
@@ -10,7 +10,7 @@ export default {
   getUsersTop() {
     return $axios.get('/users/top');
   },
-  addFavorite({ restaurantId }) {;
+  addFavorite({ restaurantId }) {
     return $axios.post(`/favorite/${restaurantId}`, null);
   },
   deleteFavorite({ restaurantId }) {

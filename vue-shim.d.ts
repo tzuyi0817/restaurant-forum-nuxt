@@ -1,4 +1,6 @@
-import { NuxtAxiosInstance } from '@nuxtjs/axios';
+import type { NuxtAxiosInstance } from '@nuxtjs/axios';
+import type { NuxtCookies } from 'cookie-universal-nuxt';
+import type Swal from 'sweetalert2';
 
 declare module "*.vue" {
   import Vue from 'vue'
@@ -8,14 +10,8 @@ declare module "*.vue" {
 declare module '@nuxt/types' {
   interface Context {
     readonly $axios: NuxtAxiosInstance
-  }
-
-  interface NuxtAppOptions {
-    readonly $OneSignal: any
-  }
-
-  interface NuxtOptions {
-    OneSignal?: any
+    readonly $cookies: NuxtCookies
+    readonly $toast: Swal
   }
 }
 

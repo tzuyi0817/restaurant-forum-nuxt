@@ -1,4 +1,6 @@
-export default function ({ store, redirect, $toast }) {
+import { Plugin } from '@nuxt/types';
+
+const myPlugin: Plugin = ({ store, redirect, $toast, $cookies }) => {
   if (store.state.isAuthenticated === false) {
     $toast.fire({
       icon: "error",
@@ -6,4 +8,6 @@ export default function ({ store, redirect, $toast }) {
     });
     return redirect('/signIn');
   }
-}
+};
+
+export default myPlugin;
