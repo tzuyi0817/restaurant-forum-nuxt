@@ -24,7 +24,6 @@ export default {
     '~/plugins/context',
     '~/plugins/axios',
     '~/plugins/toast',
-    '~/plugins/mixins',
     { src: '~/plugins/vuex-persist', ssr: false },
   ],
   buildModules: [

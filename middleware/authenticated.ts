@@ -1,6 +1,6 @@
-import { Plugin } from '@nuxt/types';
+import type { Plugin } from '@nuxt/types';
 
-const myPlugin: Plugin = ({ store, redirect, $toast, $cookies }) => {
+const myPlugin: Plugin = ({ store, redirect, $toast }) => {
   if (store.state.isAuthenticated === false) {
     $toast.fire({
       icon: "error",

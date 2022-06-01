@@ -34,7 +34,8 @@
 <script>
 import NavTabs from "../../components/NavTabs";
 import userAPI from "../../api/users";
-import { emptyImageFilter } from "../../plugins/mixins";
+import { emptyImageFilter } from "@/assets/utils/mixins";
+
 export default {
   mixins: [emptyImageFilter],
   components: {

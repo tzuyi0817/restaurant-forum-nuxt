@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { fromNowFilter } from "../plugins/mixins";
+import { fromNowFilter } from "@/assets/utils/mixins";
 
 export default {
   mixins: [fromNowFilter],
