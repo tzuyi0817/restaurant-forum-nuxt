@@ -1,0 +1,20 @@
+.card {
+  border: none;
+  box-shadow: -1px 4px 10px rgba(0, 0, 0, 0.06);
+  &-text {
+    font-size: 17px;
+    line-height: 1.3;
+    .title-wrap {
+      margin: 0;
+    }
+    a {
+      font-family: inherit;
+      font-size: 24px;
+      line-height: 1.3;
+      color: #4d4d4d;
+      &:hover {
+        color: #3333ff;
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+%btn-primary-style {
+  color: #fff;
+  background-color: #3333ff;
+  border-color: #3333ff;
+}
+
+%btn-hover-style {
+  background: transparent;
+  color: #3333ff;
+  text-decoration: none;
+  border: 2px solid #3333ff;
+}
+
+%btn-style {
+  min-width: 85px;
+  padding: 7px 14px;
+  font-size: 14px;
+  color: white;
+  background-color: #3333ff;
+  border: 2px solid #3333ff;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-primary {
+  @extend %btn-primary-style;
+  &:disabled {
+    @extend %btn-primary-style;
+  }
+  &:not(:disabled):not(.disabled):active {
+    @extend %btn-hover-style;
+  }
+  &:hover {
+    @extend %btn-hover-style;
+  }
+}
+
+.btn {
+  @extend %btn-style;
+  outline: none;
+  box-shadow: none;
+  &:focus {
+    box-shadow: none;
+    background-color: #3333ff;
+    outline: none;
+  }
+  &:hover {
+    @extend %btn-hover-style;
+  }
+}
+
+.btn-border {
+  @extend %btn-hover-style;
+  &:hover {
+    @extend %btn-style;
+  }
+}
+
+.btn-outline-success {
+  border-color: white;
+  border-width: 1px;
+  &:hover {
+    color: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.85);
+    border-width: 1px;
+  }
+}
