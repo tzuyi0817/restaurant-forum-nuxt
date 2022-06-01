@@ -39,7 +39,7 @@
 
 <script>
 import adminRestaurantAPI from "../../../../api/admin";
-import { emptyImageFilter } from "../../../../plugins/mixins";
+import { emptyImageFilter } from "@/assets/utils/mixins";
 
 export default {
   mixins: [emptyImageFilter],

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { fromNowFilter } from "../plugins/mixins";
+import { fromNowFilter } from "@/assets/utils/mixins";
 import commentAPI from "../api/comments";
 
 export default {

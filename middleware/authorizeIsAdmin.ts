@@ -1,4 +1,6 @@
-export default function ({ store, redirect }) {
+import type { Plugin } from '@nuxt/types';
+
+const myPlugin: Plugin = ({ store, redirect, $toast }) => {
   const { currentUser } = store.state;
   if (currentUser?.isAdmin === false) {
     $toast.fire({
@@ -7,4 +9,6 @@ export default function ({ store, redirect }) {
     });
     return redirect('/restaurants');
   }
-}
+};
+
+export default myPlugin;
