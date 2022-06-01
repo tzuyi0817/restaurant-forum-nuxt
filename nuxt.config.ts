@@ -18,7 +18,7 @@ export default {
     continuous: true
   },
   css: [
-    '~assets/application.scss'
+    '~assets/scss/index.scss'
   ],
   plugins: [
     '~/plugins/context',

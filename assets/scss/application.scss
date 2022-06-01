@@ -1,0 +1,19 @@
+* {
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #4d4d4d;
+  outline: none;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-active {
+  opacity: 0;
+}
+
+.swal2-popup.swal2-toast {
+  box-shadow: none;
+  border: 1px solid #dadada;
+}

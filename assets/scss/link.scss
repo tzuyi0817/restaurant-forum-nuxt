@@ -1,0 +1,16 @@
+a,
+span {
+  color: #3333ff;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: #3333ff;
+  }
+}
+
+.page-link:focus,
+.navbar-dark {
+  .navbar-toggler {
+    outline: none;
+    box-shadow: none;
+  }
+}
