@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  middleware: "authorizeIsAdmin"
+  middleware: ["authorizeIsAdmin"]
 };
 </script>

@@ -3,6 +3,7 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
       <nuxt-link class="navbar-brand" to="/restaurants">餐廳評論網</nuxt-link>
       <button
+        v-if="isAuthenticated"
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
@@ -15,7 +16,7 @@
         <span class="navbar-toggler-icon" />
       </button>
 
-      <div id="navbarSupportedContent" class="navbar-collapse collapse">
+      <div id="navbarSupportedContent" class="navbar-collapse collapse" v-if="isAuthenticated">
         <div class="ml-auto d-flex align-items-center">
           <!-- is user is admin -->
           <nuxt-link
@@ -25,7 +26,7 @@
           >管理員後台</nuxt-link>
 
           <!-- is user is login -->
-          <template v-if="isAuthenticated">
+          <template>
             <nuxt-link to="#" class="text-white mr-3">{{ currentUser.name || "使用者" }} 您好</nuxt-link>
 
             <button
@@ -39,8 +40,8 @@
     </nav>
 
     <ul v-show="open" class="checked-nav">
-      <li @click.prevent.stop="checked">
-        <nuxt-link v-if="currentUser.isAdmin" to="/admin/restaurants" class="text-white mr-3">管理員後台</nuxt-link>
+      <li @click.prevent.stop="checked" v-if="currentUser.isAdmin">
+        <nuxt-link to="/admin/restaurants" class="text-white mr-3">管理員後台</nuxt-link>
       </li>
       <li @click.prevent.stop="checked">
         <nuxt-link to="#" class="text-white mr-3">會員管理</nuxt-link>
@@ -69,7 +70,7 @@ export default {
     ...mapMutations(["revokeAuthentication"]),
     logout() {
       this.revokeAuthentication();
-      this.$router.push("/signIn");
+      this.$router.push("/signin");
     },
     checked() {
       this.open = !this.open;

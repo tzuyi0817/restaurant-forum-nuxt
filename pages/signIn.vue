@@ -36,7 +36,7 @@
         class="btn btn-lg btn-primary btn-block mb-3"
         type="submit"
         :disabled="isProcessing"
-      >{{isProcessing ? "登入中" : "Submit"}}</button>
+      >{{ isProcessing ? "Processing" : "Submit" }}</button>
 
       <div class="text-center mb-3">
         <p>
@@ -49,11 +49,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import authorizationAPI from "../api/authorization";
 import { mapMutations } from "vuex";
 
-export default {
+export default Vue.extend({
   data() {
     return {
       email: "",
@@ -76,7 +77,7 @@ export default {
         this.isProcessing = true;
         const { data, statusText } = await authorizationAPI.signIn({
           email: this.email,
-          password: this.password
+          password: this.password,
         });
 
         if (statusText !== "OK" || data.status !== "success") {
@@ -97,10 +98,10 @@ export default {
 
         this.$toast.fire({
           icon: "error",
-          title: "請確認您輸入的帳號密碼錯誤"
+          title: "請確認您輸入的帳號密碼是否正確"
         });
       }
     }
   }
-};
+});
 </script>

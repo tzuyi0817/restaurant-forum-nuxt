@@ -93,6 +93,9 @@ export default {
   &:hover span {
     @extend %active-and-hover-style;
   }
+  &:hover span {
+    background-color: transparent;
+  }
 }
 
 .page-item {
