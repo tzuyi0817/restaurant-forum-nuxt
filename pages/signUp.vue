@@ -62,7 +62,7 @@
         class="btn btn-lg btn-primary btn-block mb-3"
         type="submit"
         :disabled="isProcessing"
-      >Submit</button>
+      >{{ isProcessing ? "Processing" : "Submit" }}</button>
 
       <div class="text-center mb-3">
         <p>
@@ -76,9 +76,10 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import authorizationAPI from "../api/authorization";
 
-export default {
+export default Vue.extend({
   data() {
     return {
       name: "",
@@ -91,12 +92,7 @@ export default {
   methods: {
     async handleSubmit() {
       try {
-        if (
-          !this.name ||
-          !this.email ||
-          !this.password ||
-          !this.passwordCheck
-        ) {
+        if (!this.name || !this.email || !this.password) {
           this.$toast.fire({
             icon: "warning",
             title: "請確認已填寫所有欄位"
@@ -142,5 +138,5 @@ export default {
       }
     }
   }
-};
+});
 </script>
