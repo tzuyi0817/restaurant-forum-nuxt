@@ -27,7 +27,9 @@
 
           <!-- is user is login -->
           <template>
-            <nuxt-link to="#" class="text-white mr-3">{{ currentUser.name || "使用者" }} 您好</nuxt-link>
+            <nuxt-link :to="`/users/${currentUser.id}`" class="text-white mr-3">
+              {{ currentUser.name || "使用者" }} 您好
+            </nuxt-link>
 
             <button
               type="button"
@@ -44,7 +46,7 @@
         <nuxt-link to="/admin/restaurants" class="text-white mr-3">管理員後台</nuxt-link>
       </li>
       <li @click.prevent.stop="checked">
-        <nuxt-link to="#" class="text-white mr-3">會員管理</nuxt-link>
+        <nuxt-link :to="`/users/${currentUser.id}`" class="text-white mr-3">會員管理</nuxt-link>
       </li>
       <li @click.prevent.stop="checked">
         <button type="button" class="btn btn-sm btn-outline-success my-2 my-sm-0" @click="logout">登出</button>

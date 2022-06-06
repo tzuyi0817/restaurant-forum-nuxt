@@ -7,4 +7,4 @@ export default interface State {
     isAdmin?: boolean
   },
   isAuthenticated: boolean,
-}
+};
