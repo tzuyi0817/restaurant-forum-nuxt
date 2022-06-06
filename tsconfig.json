@@ -15,6 +15,7 @@
     "strict": true,
     "noEmit": true,
     "baseUrl": ".",
+    "jsx": "preserve",
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"],
@@ -26,5 +27,13 @@
     ]
   },
   "include": ["./**/*.ts", "./**/*.vue"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2,
+    "experimentalTemplateCompilerOptions": {
+      "compatConfig": {
+        "MODE": 2
+      }
+    }
+  }
 }

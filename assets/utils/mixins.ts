@@ -11,7 +11,7 @@ export const fromNowFilter = {
 export const emptyImageFilter = {
   filters: {
     emptyImage(src: string) {
-      return src || 'http://via.placeholder.com/300x300?text=No+Image';
+      return src || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT19eLyqRHQDO-VnXj1HhzL_9q8yHF-3ewIhA&usqp=CAU';
     }
   }
 };
