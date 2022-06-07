@@ -36,7 +36,7 @@ export default {
     'cookie-universal-nuxt',
   ],
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts", ".tsx", ".js", '.vue']
   },
   fontawesome: {
     imports: [

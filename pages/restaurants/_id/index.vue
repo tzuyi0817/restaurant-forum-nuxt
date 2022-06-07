@@ -1,20 +1,17 @@
 <template>
   <div class="container py-5">
-    <!-- 餐廳資訊頁 RestaurantDetail -->
     <RestaurantDetail :restaurant="restaurant" :is-favorited="isFavorited" :is-liked="isLiked" />
     <hr />
-    <!-- 餐廳評論 RestaurantComments -->
     <RestaurantComments :comments="comments" @after-delete-comment="afterDeleteComment" />
-    <!-- 新增評論 CreateComment -->
     <CreateComment :restaurant-id="restaurant.id" @after-create-comment="afterCreateComment" />
   </div>
 </template>
 
 <script>
-import RestaurantDetail from "../../../components/RestaurantDetail";
-import RestaurantComments from "../../../components/RestaurantComments";
-import CreateComment from "../../../components/CreateComment";
-import restaurantAPI from "../../../api/restaurants";
+import RestaurantDetail from "@/components/RestaurantDetail";
+import RestaurantComments from "@/components/RestaurantComments";
+import CreateComment from "@/components/CreateComment";
+import restaurantAPI from "@/api/restaurants";
 import { mapState } from "vuex";
 
 export default {

@@ -1,9 +1,9 @@
 import type { NuxtAxiosInstance } from '@nuxtjs/axios';
 import type { NuxtCookies } from 'cookie-universal-nuxt';
 import type Swal from 'sweetalert2';
+import type Vue from "vue";
 
 declare module "*.vue" {
-  import Vue from 'vue'
   export default Vue
 }
 

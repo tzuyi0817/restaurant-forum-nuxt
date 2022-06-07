@@ -1,5 +1,8 @@
+import type { Category } from "@/types/category";
+
 export interface Restaurant {
   CategoryId: number;
+  Category: Category;
   address: string;
   createdAt: string;
   description: string;

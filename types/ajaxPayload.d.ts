@@ -1,5 +1,5 @@
 export type UserId = {
-  userId: string;
+  userId: number;
 };
 
 export type RestaurantId = {
@@ -20,7 +20,7 @@ export type CreateComment = {
 };
 
 export type DeleteComment = {
-  commentId: string;
+  commentId: number;
 };
 
 export type SignIn = {
