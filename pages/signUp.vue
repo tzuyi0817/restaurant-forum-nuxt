@@ -133,7 +133,7 @@ export default Vue.extend({
 
         this.$toast.fire({
           icon: "error",
-          title: `無法註冊 - ${error.message}`
+          title: `無法註冊 - ${error}`
         });
       }
     }

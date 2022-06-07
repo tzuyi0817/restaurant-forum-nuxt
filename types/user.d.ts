@@ -4,6 +4,8 @@ import type { Follow } from '@/types/follow';
 
 export interface Profile {
   Followings: Array<Follow>;
+  FollowerCount: number;
+  isFollowed: boolean;
   Comments: Array<Comment>;
   FavoritedRestaurants: Array<FavoriteRestaurant>;
   Followers: Array<Follow>;

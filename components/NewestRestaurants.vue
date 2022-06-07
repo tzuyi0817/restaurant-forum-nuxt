@@ -4,29 +4,35 @@
     <div class="card-body">
       <div v-for="restaurant in restaurants" :key="restaurant.id">
         <h4>
-          <nuxt-link
-            :to="{ name: 'restaurants-id', params: { id: restaurant.id}}"
-          >{{ restaurant.name }}</nuxt-link>&nbsp;
+          <nuxt-link :to="{ name: 'restaurants-id', params: { id: restaurant.id }}">
+            {{ restaurant.name }}
+          </nuxt-link>&nbsp;
           <small>{{ restaurant.Category.name }}</small>
         </h4>
         <p>{{ restaurant.description }}</p>
-        {{ restaurant.createdAt | fromNow }}
+        {{ fromNow(restaurant.createdAt) }}
         <hr />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import { fromNowFilter } from "@/assets/utils/mixins";
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import { fromNow } from "@/assets/utils/mixins";
+import type { Restaurant } from '@/types/restaurant';
 
-export default {
-  mixins: [fromNowFilter],
+export default Vue.extend({
   props: {
     restaurants: {
-      type: Array,
+      type: Array as PropType<Restaurant[]>,
       required: true
     }
+  },
+  methods: {
+    fromNow(time: string) {
+      return fromNow(time);
+    }
   }
-};
+});
 </script>

@@ -8,14 +8,13 @@
       <div class="col-md-4">
         <img
           class="img-responsive center-block"
-          :src="restaurant.image | emptyImage"
-          style="width: 250px;margin-bottom: 25px;"
+          :src="emptyImage(restaurant.image)"
         />
         <div class="well">
           <ul class="list-unstyled">
             <li>
               <strong>Opening Hour:</strong>
-              {{ restaurant.openingHours }}
+              {{ restaurant.opening_hours }}
             </li>
             <li>
               <strong>Tel:</strong>
@@ -33,43 +32,52 @@
       </div>
     </div>
     <hr />
-    <a href="#" @click="$router.back()">回上一頁</a>
+    <nuxt-link to="#" @click="$router.back()">回上一頁</nuxt-link>
   </div>
 </template>
 
-<script>
-import adminRestaurantAPI from "../../../../api/admin";
-import { emptyImageFilter } from "@/assets/utils/mixins";
+<script lang="ts">
+import Vue from 'vue';
+import adminRestaurantAPI from "@/api/admin";
+import { emptyImage } from "@/assets/utils/mixins";
+import type { Restaurant } from '@/types/restaurant';
 
-export default {
-  mixins: [emptyImageFilter],
+export default Vue.extend({
   data() {
     return {
-      restaurant: {}
+      restaurant: {} as Restaurant,
     };
   },
-  async asyncData({ params }) {
+  async fetch() {
     try {
+      const { id: restaurantId } = this.$route.params;
       const {
         data,
         statusText
-      } = await adminRestaurantAPI.restaurant.getDetail({
-        restaurantId: params.id
-      });
+      } = await adminRestaurantAPI.restaurant.getDetail({ restaurantId });
 
       if (statusText !== "OK") {
         throw new Error(statusText);
       }
-
-      return {
-        restaurant: data.restaurant
-      };
+      this.restaurant = data.restaurant;
     } catch (error) {
-      Toast.fire({
+      this.$toast.fire({
         icon: "error",
         title: "無法取得餐廳資料，請稍後再試"
       });
     }
+  },
+  methods: {
+    emptyImage(src: string | null) {
+      return emptyImage(src ?? '');
+    },
   }
-};
+});
 </script>
+
+<style lang="scss" scoped>
+.img-responsive {
+  width: 250px;
+  margin-bottom: 25px;
+}
+</style>

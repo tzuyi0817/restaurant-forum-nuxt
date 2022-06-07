@@ -8,44 +8,42 @@
           type="button"
           class="btn btn-danger float-right"
           @click.stop.prevent="deleteComment(comment.id)"
-          :disabled="isPorcessing"
+          :disabled="isProcessing"
         >Delete</button>
         <h3>
-          <nuxt-link to="#">{{ comment.User.name }}</nuxt-link>
+          <nuxt-link :to="`/users/${comment.User.id}`">{{ comment.User.name }}</nuxt-link>
         </h3>
         <p>{{ comment.text }}</p>
-        <footer class="blockquote-footer">{{ comment.createdAt | fromNow }}</footer>
+        <footer class="blockquote-footer">{{ fromNow(comment.createdAt) }}</footer>
       </blockquote>
       <hr />
     </div>
   </div>
 </template>
 
-<script>
-import { fromNowFilter } from "@/assets/utils/mixins";
-import commentAPI from "../api/comments";
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import commentAPI from "@/api/comments";
+import { fromNow } from "@/assets/utils/mixins";
+import type { Comment } from '@/types/comment';
 
-export default {
-  mixins: [fromNowFilter],
+export default Vue.extend({
   props: {
     comments: {
-      type: Array,
+      type: Array as PropType<Comment[]>,
       required: true
     }
   },
   data() {
     return {
-      isPorcessing: false
+      isProcessing: false
     };
   },
   methods: {
-    async deleteComment(commentId) {
+    async deleteComment(commentId: number) {
       try {
-        this.isPorcessing = true;
-
-        const { data, statusText } = await commentAPI.deleteComment({
-          commentId
-        });
+        this.isProcessing = true;
+        const { data, statusText } = await commentAPI.deleteComment({ commentId });
 
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
@@ -58,18 +56,21 @@ export default {
           title: "成功刪除評論"
         });
 
-        this.isPorcessing = false;
+        this.isProcessing = false;
       } catch (error) {
-        this.isPorcessing = false;
+        this.isProcessing = false;
 
         this.$toast.fire({
           icon: "error",
           title: "無法刪除評論，請稍再試"
         });
       }
+    },
+    fromNow(time: string) {
+      return fromNow(time);
     }
-  }
-};
+  },
+});
 </script>
 
 <style lang="scss" scoped>
