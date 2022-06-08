@@ -10,15 +10,9 @@ const actions: ActionTree<RootState, RootState> = {
     try {
       const userId = this.$cookies.get('userId') ?? -1;
       const { data: { profile }, statusText } = await usersAPI.get({ userId });
-
+      const { id, name, email, image, isAdmin } = profile;
       if (statusText !== 'OK') throw new Error(statusText);
-      commit('setCurrentUser', {
-        id: profile.id,
-        name: profile.name,
-        email: profile.email,
-        image: profile.image,
-        isAdmin: profile.isAdmin
-      });
+      commit('setCurrentUser', { id, name, email, image, isAdmin });
     } catch (error) {
       commit('revokeAuthentication');
     }

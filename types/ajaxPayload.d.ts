@@ -34,6 +34,7 @@ export type SignUp = {
 } & SignIn;
 
 export type UpdateRestaurant = Form & RestaurantId;
+export type UpdateUser = Form & UserId;
 
 export type QueryRestaurants = {
   page: string;

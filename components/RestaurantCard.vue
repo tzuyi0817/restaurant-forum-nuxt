@@ -197,15 +197,6 @@ export default {
   background-color: transparent;
 }
 
-.btn-border.btn {
-  background-color: #efefef;
-  color: #3333ff;
-  &:hover {
-    background-color: #3333ff;
-    color: #efefef;
-  }
-}
-
 .btn,
 .btn-border.btn:hover {
   margin: 7px 14px 7px 0;
