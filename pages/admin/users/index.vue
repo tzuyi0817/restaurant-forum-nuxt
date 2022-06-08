@@ -1,6 +1,5 @@
 <template>
   <div class="container py-5">
-    <!-- AdminNav Component -->
     <AdminNav />
 
     <table class="table">

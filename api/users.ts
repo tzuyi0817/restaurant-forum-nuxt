@@ -1,12 +1,12 @@
 import { $axios } from '@/assets/utils/externalModule';
-import type { UserId, RestaurantId } from '@/types/ajaxPayload';
+import type { UserId, RestaurantId, UpdateUser } from '@/types/ajaxPayload';
 
 export default {
-  getCurrentUser() {
-    return $axios.get(`/get_current_user`);
-  },
   get({ userId }: UserId) {
     return $axios.get(`/users/${userId}`);
+  },
+  update({ userId, formData }: UpdateUser) {
+    return $axios.put(`/users/${userId}`, formData);
   },
   getUsersTop() {
     return $axios.get('/users/top');

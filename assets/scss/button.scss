@@ -49,7 +49,7 @@
   }
 }
 
-.btn-border {
+.btn-border.btn {
   @extend %btn-hover-style;
   &:hover {
     @extend %btn-style;
@@ -57,7 +57,7 @@
 }
 
 .btn-outline-success {
-  border-color: white;
+  border-color: #fff;
   border-width: 1px;
   &:hover {
     color: rgba(255, 255, 255, 0.85);
