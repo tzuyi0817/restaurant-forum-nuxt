@@ -23,7 +23,7 @@ const myPlugin: Plugin = ({ store }) => {
 
 async function initFromCookies({ state, commit }: Store<any>) {
   await Promise.resolve();
-  commit('setCurrentUser', state.currentUser);
+  state.currentUser.name && commit('setCurrentUser', state.currentUser);
 }
 
 export default myPlugin;

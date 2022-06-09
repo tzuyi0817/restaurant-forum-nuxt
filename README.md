@@ -1,22 +1,8 @@
-# nuxt-project
+# restaurant-forum-nuxt
 
-> My primo Nuxt.js project
+restaurant forum nuxt ([URL](https://restaurant-forum-nuxt.herokuapp.com))
 
-## Build Setup
 
-```bash
-# install dependencies
-$ npm install
+## Introduction
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+Use Nuxt.js + Node.js to separate the front and back ends, and implement SSR to solve SEO problems. The website has the function of restaurant reviews in the front desk, and the functions of managing restaurants and categories in the background.
