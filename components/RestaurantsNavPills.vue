@@ -14,15 +14,18 @@
   </ul>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import type { Category } from '@/types/category';
+
+export default Vue.extend({
   props: {
     categories: {
-      type: Array,
+      type: Array as PropType<Category[]>,
       required: true
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

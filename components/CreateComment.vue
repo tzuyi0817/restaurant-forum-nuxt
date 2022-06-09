@@ -10,14 +10,16 @@
   </form>
 </template>
 
-<script>
-import commentsAPI from "../api/comments";
+<script lang="ts">
+import Vue from 'vue';
+import commentsAPI from "@/api/comments";
 
-export default {
+export default Vue.extend({
   props: {
     restaurantId: {
       type: Number,
-      required: true
+      required: true,
+      default: -1,
     }
   },
   data() {
@@ -30,7 +32,7 @@ export default {
     async addComment() {
       try {
         if (!this.text) {
-          Toast.fire({
+          this.$toast.fire({
             icon: "warning",
             title: "您尚未填寫任何評論"
           });
@@ -38,13 +40,12 @@ export default {
         }
 
         this.isProcessing = true;
-
         const { data, statusText } = await commentsAPI.createComment({
           restaurantId: this.restaurantId,
           text: this.text
         });
 
-        if ((statusText !== "OK", data.status !== "success")) {
+        if ((statusText !== "OK" || data.status !== "success")) {
           throw new Error(statusText);
         }
 
@@ -56,14 +57,12 @@ export default {
 
         this.text = "";
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "success",
           title: "成功新增評論"
         });
       } catch (error) {
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "error",
           title: "無法新增評論，請稍後再試"
@@ -71,7 +70,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

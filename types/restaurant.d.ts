@@ -1,4 +1,5 @@
 import type { Category } from "@/types/category";
+import type { Comment } from "@/types/comment";
 
 export interface Restaurant {
   CategoryId: number;
@@ -13,6 +14,10 @@ export interface Restaurant {
   tel: string;
   updatedAt: string;
   viewCounts: number;
+  FavoriteCount: number;
+  isFavorited: boolean;
+  Comments: Array<Comment>;
+  isLiked: boolean;
 };
 
 export interface FavoriteRestaurant extends Restaurant {

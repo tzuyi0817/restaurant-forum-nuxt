@@ -9,38 +9,38 @@
   </div>
 </template>
 
-<script>
-import AdminRestaurantForm from "../../../../components/AdminRestaurantForm";
-import adminAPI from "../../../../api/admin";
+<script lang="ts">
+import Vue from 'vue';
+import AdminRestaurantForm from "@/components/AdminRestaurantForm.vue";
+import adminAPI from "@/api/admin";
+import type { Restaurant } from '@/types/restaurant';
+import type { Category } from '@/types/category';
 
-export default {
+export default Vue.extend({
   components: {
     AdminRestaurantForm
   },
   data() {
     return {
-      restaurant: {},
-      categories: [],
+      restaurant: {} as Restaurant,
+      categories: [] as Array<Category>,
       isProcessing: false
     };
   },
-  async asyncData({ params }) {
+  async fetch() {
     try {
-      const [categories, restaurant] = await Promise.all([
+      const { id: restaurantId } = this.$route.params;
+      const [categoriesResponse, restaurantResponse] = await Promise.all([
         adminAPI.categories.get(),
-        adminAPI.restaurant.getDetail({
-          restaurantId: params.id
-        })
+        adminAPI.restaurant.getDetail({ restaurantId: +restaurantId }),
       ]);
 
-      if (categories.statusText !== "OK" || restaurant.statusText !== "OK") {
-        throw new Error(categories.statusText || restaurant.statusText);
+      if (categoriesResponse.statusText !== "OK" || restaurantResponse.statusText !== "OK") {
+        throw new Error('Error');
       }
 
-      return {
-        categories: categories.data.categories,
-        restaurant: restaurant.data.restaurant
-      };
+      this.categories = categoriesResponse.data.categories;
+      this.restaurant = restaurantResponse.data.restaurant;
     } catch (error) {
       this.$toast.fire({
         icon: "error",
@@ -49,10 +49,9 @@ export default {
     }
   },
   methods: {
-    async handleAfterSubmit(formData) {
+    async handleAfterSubmit(formData: FormData) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await adminAPI.restaurant.update({
           restaurantId: this.restaurant.id,
           formData
@@ -66,11 +65,9 @@ export default {
           icon: "success",
           title: "已成功更新餐廳資料"
         });
-
         this.$router.push({ name: "admin-restaurants" });
       } catch (error) {
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "error",
           title: "無法更新餐廳資料，請稍後再試"
@@ -78,5 +75,5 @@ export default {
       }
     }
   }
-};
+});
 </script>

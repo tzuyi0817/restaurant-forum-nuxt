@@ -1,6 +1,6 @@
 <script>
 export default {
-  fetch({ redirect }) {
+  validate ({ redirect }) {
     redirect(301, '/restaurants');
   },
 };

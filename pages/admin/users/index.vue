@@ -33,44 +33,47 @@
   </div>
 </template>
 
-<script>
-import AdminNav from "../../../components/AdminNav";
-import adminAPI from "../../../api/admin";
+<script lang="ts">
+import Vue from 'vue';
+import AdminNav from "@/components/AdminNav.vue";
+import adminAPI from "@/api/admin";
 import { mapState } from "vuex";
+import type { Profile } from '@/types/user';
 
-export default {
+interface toggleUserRoleArgs {
+  userId: number;
+  isAdmin: boolean;
+};
+
+export default Vue.extend({
   components: {
     AdminNav
   },
   data() {
     return {
-      users: [],
+      users: [] as Array<Profile>,
       isProcessing: false
     };
   },
   computed: {
     ...mapState(["currentUser"])
   },
-  async asyncData() {
+  async fetch() {
     try {
       const { data, statusText } = await adminAPI.users.get();
-
       if (statusText !== "OK") {
         throw new Error(statusText);
       }
-
-      return {
-        users: data.users
-      };
+      this.users = data.users;
     } catch (error) {
-      Toast.fire({
+      this.$toast.fire({
         icon: "error",
         title: "無法取得會員資料，請稍後再試"
       });
     }
   },
   methods: {
-    async toggleUserRole({ userId, isAdmin }) {
+    async toggleUserRole({ userId, isAdmin }: toggleUserRoleArgs) {
       try {
         this.isProcessing = true;
 
@@ -79,35 +82,28 @@ export default {
           isAdmin
         });
 
-        if (data.status === "error") {
-          throw new Error(data.message);
+        if (statusText !== "OK" || data.status !== "success") {
+          throw new Error(statusText);
         }
-
-        this.users = this.users.map(user => {
-          if (user.id === userId) {
-            return {
-              ...user,
-              isAdmin: !isAdmin
-            };
-          }
-          return user;
-        });
-
+        this.updateUsers(userId);
         this.isProcessing = false;
-
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "已成功更新會員角色"
         });
       } catch (error) {
         this.isProcessing = false;
-        console.error(error.message);
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法更新會員角色，請稍後再試"
         });
       }
+    },
+    updateUsers(userId: number) {
+      const user = this.users.find(user => user.id === userId);
+      if (user === void 0) return;
+      user.isAdmin = !user.isAdmin;
     }
   }
-};
+});
 </script>

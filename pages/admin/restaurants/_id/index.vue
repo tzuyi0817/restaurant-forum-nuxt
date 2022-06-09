@@ -3,12 +3,12 @@
     <div class="row">
       <div class="col-md-12">
         <h1>{{ restaurant.name }}</h1>
-        <p>[{{ restaurant.Category.name }}]</p>
+        <p>[{{ restaurant.Category && restaurant.Category.name }}]</p>
       </div>
       <div class="col-md-4">
         <img
           class="img-responsive center-block"
-          :src="emptyImage(restaurant.image)"
+          :src="restaurant.image"
         />
         <div class="well">
           <ul class="list-unstyled">
@@ -32,14 +32,13 @@
       </div>
     </div>
     <hr />
-    <nuxt-link to="#" @click="$router.back()">回上一頁</nuxt-link>
+    <a href="#" @click="$router.back()">回上一頁</a>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import adminRestaurantAPI from "@/api/admin";
-import { emptyImage } from "@/assets/utils/mixins";
 import type { Restaurant } from '@/types/restaurant';
 
 export default Vue.extend({
@@ -51,10 +50,9 @@ export default Vue.extend({
   async fetch() {
     try {
       const { id: restaurantId } = this.$route.params;
-      const {
-        data,
-        statusText
-      } = await adminRestaurantAPI.restaurant.getDetail({ restaurantId });
+      const { data, statusText } = await adminRestaurantAPI.restaurant.getDetail({
+        restaurantId: +restaurantId
+      });
 
       if (statusText !== "OK") {
         throw new Error(statusText);
@@ -67,11 +65,6 @@ export default Vue.extend({
       });
     }
   },
-  methods: {
-    emptyImage(src: string | null) {
-      return emptyImage(src ?? '');
-    },
-  }
 });
 </script>
 

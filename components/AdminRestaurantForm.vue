@@ -105,11 +105,15 @@
   </form>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import type { Restaurant } from '@/types/restaurant';
+import type { Category } from '@/types/category';
+
+export default Vue.extend({
   props: {
     categories: {
-      type: Array,
+      type: Array as PropType<Category[]>,
       required: true
     },
     isProcessing: {
@@ -117,7 +121,7 @@ export default {
       default: false
     },
     initialRestaurant: {
-      type: Object,
+      type: Object as PropType<Restaurant>,
       default: () => {
         return {
           name: "",
@@ -133,20 +137,25 @@ export default {
   },
   data() {
     return {
-      restaurant: {
-        ...this.initialRestaurant
-      }
+      restaurant: { ...this.initialRestaurant }
     };
   },
+  watch: {
+    initialRestaurant(restaurant) {
+      this.restaurant = {
+        ...this.restaurant,
+        ...restaurant
+      };
+    }
+  },
   methods: {
-    handleFileChange(e) {
-      const { files } = e.target;
-      if (!files.length) return; // 如果沒有檔案則離開此函式
-      // 否則產生預覽圖...
+    handleFileChange(event: Event) {
+      const { files } = <HTMLInputElement>event.target;
+      if (!files?.length) return;
       const imageURL = window.URL.createObjectURL(files[0]);
       this.restaurant.image = imageURL;
     },
-    handleSubmit(e) {
+    handleSubmit(event: Event) {
       if (!this.restaurant.name) {
         this.$toast.fire({
           icon: "warning",
@@ -162,10 +171,10 @@ export default {
         return;
       }
 
-      const form = e.target;
+      const form = event.target as HTMLFormElement;
       const formData = new FormData(form);
       this.$emit("after-submit", formData);
     }
   }
-};
+});
 </script>

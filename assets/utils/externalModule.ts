@@ -23,6 +23,6 @@ function setCookies () {
   const GET_COOKIE = $cookies.get;
 
   $cookies.get = function (name: string, opts: GetOptions | undefined) {
-    return GET_COOKIE(name, opts) ?? GET_COOKIE(name, { parseJSON: true, fromRes: true });
+    return GET_COOKIE(name, { parseJSON: true, fromRes: true }) ?? GET_COOKIE(name, opts);
   };
 }

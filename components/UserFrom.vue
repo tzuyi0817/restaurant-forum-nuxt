@@ -75,7 +75,7 @@ export default Vue.extend({
   },
   methods: {
     handleFileChange(event: Event) {
-      const files = (<HTMLInputElement>event.target).files;
+      const { files } = <HTMLInputElement>event.target;
       if (!files?.length) return;
       const imageURL = window.URL.createObjectURL(files[0]);
       this.user.image = imageURL;

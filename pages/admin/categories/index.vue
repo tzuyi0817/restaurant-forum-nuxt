@@ -67,22 +67,34 @@
   </div>
 </template>
 
-<script>
-import AdminNav from "../../../components/AdminNav";
-import adminAPI from "../../../api/admin";
+<script lang="ts">
+import Vue from 'vue';
+import AdminNav from "@/components/AdminNav.vue";
+import adminAPI from "@/api/admin";
+import type { Category } from '@/types/category';
 
-export default {
+type customCategory = Category & {
+  isEditing: boolean;
+  nameCached: string;
+};
+
+interface updateCategoryArgs {
+  categoryId: number;
+  name: string;
+};
+
+export default Vue.extend({
   components: {
     AdminNav
   },
   data() {
     return {
-      categories: [],
+      categories: [] as Array<customCategory>,
       newCategoryName: "",
       isProcessing: false
     };
   },
-  async asyncData() {
+  async fetch() {
     try {
       const { data, statusText } = await adminAPI.categories.get();
 
@@ -90,13 +102,11 @@ export default {
         throw new Error(statusText);
       }
 
-      return {
-        categories: data.categories.map(category => ({
-          ...category,
-          isEditing: false,
-          nameCached: ""
-        }))
-      };
+      this.categories = data.categories.map((category: Category) => ({
+        ...category,
+        isEditing: false,
+        nameCached: ""
+      }));
     } catch (error) {
       this.$toast.fire({
         icon: "error",
@@ -120,12 +130,14 @@ export default {
         this.categories.push({
           id: data.categoryId,
           name: this.newCategoryName,
-          isEditing: false
+          isEditing: false,
+          nameCached: "",
+          createdAt: new Date().toDateString(),
+          updatedAt: new Date().toDateString(),
         });
 
         this.isProcessing = false;
         this.newCategoryName = "";
-
         this.$toast.fire({
           icon: "success",
           title: "已成功新增類別"
@@ -139,10 +151,9 @@ export default {
         });
       }
     },
-    async deleteCategory(categoryId) {
+    async deleteCategory(categoryId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await adminAPI.categories.delete({
           categoryId
         });
@@ -156,21 +167,19 @@ export default {
         );
 
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "success",
           title: "已成功刪除該類別"
         });
       } catch (error) {
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "error",
           title: "無法刪除類別，請稍後再試"
         });
       }
     },
-    toggleIsEditing(categoryId) {
+    toggleIsEditing(categoryId: number) {
       this.categories = this.categories.map(category => {
         if (category.id === categoryId) {
           return {
@@ -182,7 +191,7 @@ export default {
         return category;
       });
     },
-    async updateCategory({ categoryId, name }) {
+    async updateCategory({ categoryId, name }: updateCategoryArgs) {
       try {
         const { data, statusText } = await adminAPI.categories.update({
           categoryId,
@@ -194,19 +203,18 @@ export default {
         }
 
         this.toggleIsEditing(categoryId);
-
-        Toast.fire({
+        this.$toast.fire({
           icon: "success",
           title: "已成功更新餐廳類別"
         });
       } catch (error) {
-        Toast.fire({
+        this.$toast.fire({
           icon: "error",
           title: "無法更新餐廳類別，請稍後再試"
         });
       }
     },
-    handleCancel(categoryId) {
+    handleCancel(categoryId: number) {
       this.categories = this.categories.map(category => {
         if (category.id === categoryId) {
           return {
@@ -219,7 +227,7 @@ export default {
       this.toggleIsEditing(categoryId);
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>
