@@ -1,7 +1,6 @@
 <template>
   <nav aria-label="Page navigation example">
     <ul class="pagination">
-      <!-- 回到上一頁 previousPage -->
       <li v-show="previousPage" class="page-item">
         <nuxt-link
           class="page-link"
@@ -15,7 +14,6 @@
         </nuxt-link>
       </li>
 
-      <!-- 頁碼 -->
       <li
         v-for="page in totalPage"
         :key="page"
@@ -29,7 +27,6 @@
         >
       </li>
 
-      <!-- 前往下一頁 nextPage -->
       <li v-show="nextPage" class="page-item">
         <nuxt-link
           class="page-link"
@@ -43,8 +40,10 @@
   </nav>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
   props: {
     categoryId: {
       type: [String, Number],
@@ -60,16 +59,16 @@ export default {
     }
   },
   computed: {
-    previousPage() {
+    previousPage(): number | null {
       return this.currentPage === 1 ? null : this.currentPage - 1;
     },
-    nextPage() {
+    nextPage(): number | null {
       return this.currentPage + 1 > this.totalPage
         ? null
         : this.currentPage + 1;
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

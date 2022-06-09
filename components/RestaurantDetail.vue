@@ -3,15 +3,11 @@
     <div class="col-md-12 mb-3">
       <h1>{{ restaurant.name }}</h1>
       <p class="badge badge-secondary mt-1 mb-3">
-        {{ restaurant.Category.name }}
+        {{ restaurant.Category && restaurant.Category.name }}
       </p>
     </div>
     <div class="col-lg-4">
-      <img
-        class="img-responsive center-block"
-        :src="restaurant.image"
-        style="width: 250px;margin-bottom: 25px;"
-      />
+      <img class="img-responsive center-block" :src="restaurant.image" />
       <div class="contact-info-wrap">
         <ul class="list-unstyled">
           <li>
@@ -83,14 +79,28 @@
   </div>
 </template>
 
-<script>
-import userAPI from "../api/users";
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import userAPI from "@/api/users";
+import type { Restaurant } from '@/types/restaurant';
 
-export default {
+export default Vue.extend({
   props: {
     restaurant: {
-      type: Object,
-      required: true
+      type: Object as PropType<Restaurant>,
+      required: true,
+      default: () => {
+        return {
+          id: -1,
+          name: '',
+          image: undefined,
+          opening_hours: '',
+          tel: '',
+          address: '',
+          description: '',
+          Category: { name: '' },
+        }
+      }
     },
     isFavorited: {
       type: Boolean,
@@ -107,10 +117,9 @@ export default {
     };
   },
   methods: {
-    async deleteFavorite(restaurantId) {
+    async deleteFavorite(restaurantId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.deleteFavorite({
           restaurantId
         });
@@ -118,9 +127,7 @@ export default {
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-
-        this.isFavorited = false;
-
+        this.$emit('updateIsFavorited', false);
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
@@ -130,10 +137,9 @@ export default {
         });
       }
     },
-    async addFavorite(restaurantId) {
+    async addFavorite(restaurantId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.addFavorite({
           restaurantId
         });
@@ -141,9 +147,7 @@ export default {
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-
-        this.isFavorited = true;
-
+        this.$emit('updateIsFavorited', true);
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
@@ -154,44 +158,36 @@ export default {
         });
       }
     },
-    async deleteLike(restaurantId) {
+    async deleteLike(restaurantId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.deleteLike({ restaurantId });
 
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-
-        this.isLiked = false;
-
+        this.$emit('updateIsLiked', false);
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "error",
           title: "無法取消Like，請稍後再試"
         });
       }
     },
-    async addLike(restaurantId) {
+    async addLike(restaurantId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.addLike({ restaurantId });
 
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-
-        this.isLiked = true;
-
+        this.$emit('updateIsLiked', true);
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "error",
           title: "無法Like，請稍後再試"
@@ -199,7 +195,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -217,5 +213,10 @@ export default {
     background-color: #3333ff;
     color: #efefef;
   }
+}
+
+.img-responsive {
+  width: 250px;
+  margin-bottom: 25px;
 }
 </style>

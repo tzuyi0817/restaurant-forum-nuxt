@@ -18,14 +18,12 @@
 
       <div id="navbarSupportedContent" class="navbar-collapse collapse" v-if="isAuthenticated">
         <div class="ml-auto d-flex align-items-center">
-          <!-- is user is admin -->
           <nuxt-link
             v-if="currentUser.isAdmin"
             to="/admin/restaurants"
             class="text-white mr-3"
           >管理員後台</nuxt-link>
 
-          <!-- is user is login -->
           <template>
             <nuxt-link :to="`/users/${currentUser.id}`" class="text-white mr-3">
               {{ currentUser.name || "使用者" }} 您好
@@ -55,11 +53,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import { mapState, mapMutations } from "vuex";
 
-export default {
-  name: "Navbar",
+export default Vue.extend({
   data() {
     return {
       open: false
@@ -78,7 +76,7 @@ export default {
       this.open = !this.open;
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

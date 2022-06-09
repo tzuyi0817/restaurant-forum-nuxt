@@ -2,7 +2,7 @@
   <div class="container py-5">
     <div class="col-md-12">
       <h1>{{ restaurant.name }}</h1>
-      <p>[{{ restaurant.Category.name }}]</p>
+      <p>[{{ restaurant.Category && restaurant.Category.name }}]</p>
     </div>
 
     <br />
@@ -12,11 +12,11 @@
       <ul class="list-dashboard">
         <li>
           <strong>評論數 :</strong>
-          {{restaurant.Comments.length}}
+          {{ restaurant.Comments && restaurant.Comments.length }}
         </li>
         <li>
           <strong>瀏覽次數 :</strong>
-          {{restaurant.viewCounts}}
+          {{ restaurant.viewCounts }}
         </li>
       </ul>
     </div>
@@ -27,34 +27,34 @@
   </div>
 </template>
 
-<script>
-import restaurantAPI from "../../../api/restaurants";
+<script lang="ts">
+import Vue from 'vue';
+import restaurantAPI from "@/api/restaurants";
+import type { Restaurant } from '@/types/restaurant';
 
-export default {
+export default Vue.extend({
   data() {
     return {
-      restaurant: {}
+      restaurant: {} as Restaurant
     };
   },
-  async asyncData({ params }) {
+  async fetch() {
     try {
+      const { id: restaurantId } = this.$route.params;
       const { data, statusText } = await restaurantAPI.getDashboard({
-        restaurantId: params.id
+        restaurantId: +restaurantId
       });
 
       if (statusText !== "OK") {
         throw new Error(statusText);
       }
-
-      return {
-        restaurant: data.restaurant
-      };
+      this.restaurant = data.restaurant
     } catch (error) {
-      Toast.fire({
+      this.$toast.fire({
         icon: "error",
         title: "無法取得餐廳資料，請稍後再試"
       });
     }
   }
-};
+});
 </script>

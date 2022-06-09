@@ -3,19 +3,18 @@ export type UserId = {
 };
 
 export type RestaurantId = {
-  restaurantId: string;
+  restaurantId: number;
 };
 
 export type CategoryId = {
-  categoryId: string;
+  categoryId: number;
 };
 
 export type Form = {
   formData: FormData;
 };
 
-export type CreateComment = {
-  restaurantId: string;
+export type CreateComment = RestaurantId & {
   text: string;
 };
 
@@ -28,24 +27,25 @@ export type SignIn = {
   password: string;
 };
 
-export type SignUp = {
+export type SignUp = SignIn & {
   name: string;
   passwordCheck: string;
-} & SignIn;
+};
 
 export type UpdateRestaurant = Form & RestaurantId;
 export type UpdateUser = Form & UserId;
 
 export type QueryRestaurants = {
   page: string;
-} & CategoryId;
+  categoryId: string
+};
 
 export type CreateCategory = {
   name: string;
-}
+};
 
 export type UpdateCategory = CreateCategory & CategoryId;
 
-export type UpdateAdmin = {
+export type UpdateAdmin = UserId & {
   isAdmin: boolean;
-} & UserId;
+};

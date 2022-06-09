@@ -65,13 +65,15 @@
   </div>
 </template>
 
-<script>
-import userAPI from "../api/users";
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import userAPI from "@/api/users";
+import type { Restaurant } from '@/types/restaurant';
 
-export default {
+export default Vue.extend({
   props: {
     initialRestaurant: {
-      type: Object,
+      type: Object as PropType<Restaurant>,
       required: true
     }
   },
@@ -82,10 +84,9 @@ export default {
     };
   },
   methods: {
-    async deleteFavorite(restaurantId) {
+    async deleteFavorite(restaurantId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.deleteFavorite({
           restaurantId
         });
@@ -98,7 +99,6 @@ export default {
           ...this.restaurant,
           isFavorited: false
         };
-
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
@@ -108,10 +108,9 @@ export default {
         });
       }
     },
-    async addFavorite(restaurantId) {
+    async addFavorite(restaurantId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.addFavorite({
           restaurantId
         });
@@ -124,7 +123,6 @@ export default {
           ...this.restaurant,
           isFavorited: true
         };
-
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
@@ -135,10 +133,9 @@ export default {
         });
       }
     },
-    async deleteLike(restaurantId) {
+    async deleteLike(restaurantId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.deleteLike({ restaurantId });
 
         if (statusText !== "OK" || data.status !== "success") {
@@ -149,21 +146,18 @@ export default {
           ...this.restaurant,
           isLiked: false
         };
-
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "error",
           title: "無法取消Like，請稍後再試"
         });
       }
     },
-    async addLike(restaurantId) {
+    async addLike(restaurantId: number) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await userAPI.addLike({ restaurantId });
 
         if (statusText !== "OK" || data.status !== "success") {
@@ -174,11 +168,9 @@ export default {
           ...this.restaurant,
           isLiked: true
         };
-
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "error",
           title: "無法Like，請稍後再試"
@@ -186,7 +178,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

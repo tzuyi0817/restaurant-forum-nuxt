@@ -1,6 +1,5 @@
 <template>
   <div class="container py-5">
-    <!-- 後台導覽頁籤 AdminNav -->
     <AdminNav />
 
     <nuxt-link
@@ -10,43 +9,48 @@
       New Restaurant
     </nuxt-link>
 
-    <!-- 後台餐廳列表 AdminRestaurantsTable -->
-    <AdminRestaurantsTable :restaurants="restaurants" />
+    <AdminRestaurantsTable :restaurants="restaurants" @update-restaurants="updateRestaurants" />
   </div>
 </template>
 
-<script>
-import AdminNav from "../../../components/AdminNav";
-import AdminRestaurantsTable from "../../../components/AdminRestaurantsTable";
-import adminRestaurantAPI from "../../../api/admin";
+<script lang="ts">
+import Vue from 'vue';
+import AdminNav from "@/components/AdminNav.vue";
+import AdminRestaurantsTable from "@/components/AdminRestaurantsTable.vue";
+import adminRestaurantAPI from "@/api/admin";
+import type { Restaurant } from '@/types/restaurant';
 
-export default {
+export default Vue.extend({
   components: {
     AdminNav,
     AdminRestaurantsTable
   },
   data() {
     return {
-      restaurants: []
+      restaurants: [] as Array<Restaurant>
     };
   },
-  async asyncData() {
+  async fetch() {
     try {
       const { data, statusText } = await adminRestaurantAPI.restaurant.get();
 
       if (statusText !== "OK") {
         throw new Error(statusText);
       }
-
-      return {
-        restaurants: data.restaurants
-      };
+      this.restaurants = data.restaurants;
     } catch (error) {
       this.$toast.fire({
         icon: "error",
         title: "無法取得餐廳資料，請稍後在試"
       });
     }
+  },
+  methods: {
+    updateRestaurants(restaurantId: number) {
+      this.restaurants = this.restaurants.filter(
+        restaurant => restaurant.id !== restaurantId
+      );
+    }
   }
-};
+});
 </script>

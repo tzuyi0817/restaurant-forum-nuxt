@@ -1,6 +1,5 @@
 <template>
   <div class="container py-5">
-    <!-- 餐廳表單 AdminRestaurantForm -->
     <AdminRestaurantForm
       :categories="categories"
       @after-submit="afterSubmit"
@@ -9,32 +8,32 @@
   </div>
 </template>
 
-<script>
-import AdminRestaurantForm from "../../../components/AdminRestaurantForm";
-import adminAPI from "../../../api/admin";
+<script lang="ts">
+import Vue from 'vue';
+import AdminRestaurantForm from "@/components/AdminRestaurantForm.vue";
+import adminAPI from "@/api/admin";
+import type { Restaurant } from '@/types/restaurant';
+import type { Category } from '@/types/category';
 
-export default {
+export default Vue.extend({
   components: {
     AdminRestaurantForm
   },
   data() {
     return {
-      restaurant: {},
-      categories: [],
+      restaurant: {} as Restaurant,
+      categories: [] as Array<Category>,
       isProcessing: false
     };
   },
-  async asyncData() {
+  async fetch() {
     try {
       const { data, statusText } = await adminAPI.categories.get();
 
       if (statusText !== "OK") {
         throw new Error(statusText);
       }
-
-      return {
-        categories: data.categories
-      };
+      this.categories = data.categories;
     } catch (error) {
       this.$toast.fire({
         icon: "error",
@@ -43,10 +42,9 @@ export default {
     }
   },
   methods: {
-    async afterSubmit(formData) {
+    async afterSubmit(formData: FormData) {
       try {
         this.isProcessing = true;
-
         const { data, statusText } = await adminAPI.restaurant.create({
           formData
         });
@@ -59,11 +57,9 @@ export default {
           icon: "success",
           title: "餐廳已成功建立"
         });
-
         this.$router.push({ name: "admin-restaurants" });
       } catch (error) {
         this.isProcessing = true;
-
         this.$toast.fire({
           icon: "error",
           title: "無法建立餐廳，請稍後再試"
@@ -71,5 +67,5 @@ export default {
       }
     }
   }
-};
+});
 </script>

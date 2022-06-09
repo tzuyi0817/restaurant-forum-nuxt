@@ -75,7 +75,7 @@ export default Vue.extend({
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-        this.users = this.updateUsers({ follow: false, userId });
+        this.updateUsers({ follow: false, userId });
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
@@ -92,7 +92,7 @@ export default Vue.extend({
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-        this.users = this.updateUsers({ follow: true, userId });
+        this.updateUsers({ follow: true, userId });
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
@@ -103,17 +103,12 @@ export default Vue.extend({
       }
     },
     updateUsers({ follow, userId }: UpdateUsersArgs) {
-      return this.users.map(user => {
-        if (user.id !== userId) {
-          return user;
-        }
-        return {
-          ...user,
-          FollowerCount: user.FollowerCount + (follow ? 1 : -1),
-          isFollowed: follow
-        };
-      })
-      .sort((a, b) => b.FollowerCount - a.FollowerCount);
+      const user = this.users.find(user => user.id === userId);
+      if (user === void 0) return;
+  
+      user.FollowerCount = user.FollowerCount + (follow ? 1 : -1);
+      user.isFollowed = follow;
+      this.users.sort((a, b) => b.FollowerCount - a.FollowerCount);
     },
     emptyImage(src: string | null) {
       return emptyImage(src ?? '');

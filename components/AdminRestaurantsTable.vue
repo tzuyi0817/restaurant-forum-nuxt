@@ -11,7 +11,7 @@
         <th scope="col">
           Name
         </th>
-        <th scope="col" width="300">
+        <th scope="col">
           操作
         </th>
       </tr>
@@ -58,13 +58,15 @@
   </table>
 </template>
 
-<script>
+<script lang="ts">
+import Vue, { PropType } from 'vue';
 import adminRestaurantAPI from "@/api/admin";
+import type { Restaurant } from '@/types/restaurant';
 
-export default {
+export default Vue.extend({
   props: {
     restaurants: {
-      type: Array,
+      type: Array as PropType<Restaurant[]>,
       required: true
     }
   },
@@ -74,33 +76,24 @@ export default {
     };
   },
   methods: {
-    async deleteRestaurant(restaurantId) {
+    async deleteRestaurant(restaurantId: number) {
       try {
         this.isProcessing = true;
-
-        const { data, statusText } = await adminRestaurantAPI.restaurant.delete(
-          {
-            restaurantId
-          }
-        );
+        const { data, statusText } = await adminRestaurantAPI.restaurant.delete({
+          restaurantId
+        });
 
         if (statusText !== "OK" || data.status !== "success") {
           throw new Error(statusText);
         }
-
-        this.restaurants = this.restaurants.filter(
-          restaurant => restaurant.id !== restaurantId
-        );
-
+        this.$emit('updateRestaurants', restaurantId);
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "success",
           title: "刪除餐廳成功"
         });
       } catch (error) {
         this.isProcessing = false;
-
         this.$toast.fire({
           icon: "error",
           title: "無法刪除餐廳，請稍後再試"
@@ -108,5 +101,11 @@ export default {
       }
     }
   }
-};
+});
 </script>
+
+<style lang="scss">
+th, td {
+  text-align: center;
+}
+</style>
