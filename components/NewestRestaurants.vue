@@ -7,7 +7,7 @@
           <nuxt-link :to="{ name: 'restaurants-id', params: { id: restaurant.id }}">
             {{ restaurant.name }}
           </nuxt-link>&nbsp;
-          <small>{{ restaurant.Category.name }}</small>
+          <small>{{ restaurant.Category && restaurant.Category.name }}</small>
         </h4>
         <p>{{ restaurant.description }}</p>
         {{ fromNow(restaurant.createdAt) }}

@@ -8,7 +8,7 @@
       <div class="row no-gutters" v-for="restaurant in restaurants" :key="restaurant.id">
         <div class="col-md-4">
           <nuxt-link :to="{name: 'restaurants-id', params: { id: restaurant.id }}">
-            <img class="card-img" :src="restaurant.image" />
+            <img class="card-img" :src="restaurant.image || require('~/assets/images/noImage.png')" />
           </nuxt-link>
         </div>
         <div class="col-md-8">

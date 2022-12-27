@@ -3,7 +3,7 @@
     <div class="card mb-4">
       <img
         class="card-img-top"
-        :src="restaurant.image"
+        :src="restaurant.image || require('~/assets/images/noImage.png')"
         alt="Card image cap"
         width="286px"
         height="180px"
@@ -16,7 +16,7 @@
           >
         </p>
         <span class="badge badge-secondary">{{
-          restaurant.Category.name
+          restaurant.Category && restaurant.Category.name
         }}</span>
         <p class="card-text text-truncate">{{ restaurant.description }}</p>
       </div>
