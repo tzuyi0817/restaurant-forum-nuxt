@@ -55,8 +55,8 @@ export default {
     middleware: ["authenticated"],
   },
   watchQuery: true,
-  // build: {
-  //   postcss: null,
-  //   extractCSS: NODE_ENV === 'production',
-  // },
+  build: {
+    postcss: null,
+    extractCSS: NODE_ENV === 'production',
+  },
 }
