@@ -19,16 +19,13 @@
     "jsx": "preserve",
     "paths": {
       "~/*": ["./*"],
-      "@/*": ["./*"],
+      "@/*": ["./*"]
     },
     "types": [
       "@types/node",
       "@nuxt/types",
-      "@nuxtjs/axios",
+      "@nuxtjs/axios"
     ]
-  },
-  "vueCompilerOptions": {
-    "experimentalSuppressInvalidJsxElementTypeErrors": true
   },
   "include": ["./**/*.ts", "./**/*.vue"],
   "exclude": ["node_modules"]
