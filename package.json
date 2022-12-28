@@ -12,6 +12,9 @@
     "generate": "nuxt generate",
     "heroku-postbuild": "npm run build"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
