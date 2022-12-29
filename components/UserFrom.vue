@@ -1,4 +1,3 @@
-
 <template>
   <form @submit.stop.prevent="handleSubmit">
     <div class="form-group">

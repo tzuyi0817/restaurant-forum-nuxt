@@ -1,4 +1,3 @@
-
 <template>
   <div class="card mb-3">
     <div class="row no-gutters">

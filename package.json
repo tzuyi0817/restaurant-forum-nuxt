@@ -4,7 +4,6 @@
   "description": "My primo Nuxt.js project",
   "author": "Tzuyi Yang",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
